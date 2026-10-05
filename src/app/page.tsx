@@ -6,6 +6,8 @@ import { ValuesSection } from "@/components/sections/ValuesSection";
 import { PsychomotSection } from "@/components/sections/PsychomotSection";
 import { CabinetSection } from "@/components/sections/CabinetSection";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const settings = await getSiteSettings();
 

@@ -47,10 +47,9 @@ export const metadata: Metadata = {
       "Cabinet de psychomotricité : accompagnement bienveillant pour enfants, adolescents et adultes sur prescription médicale.",
     siteName: "Keliann L'Azou Psychomotricien",
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
 };
+
+export const dynamic = "force-dynamic";
 
 export default async function RootLayout({
   children,

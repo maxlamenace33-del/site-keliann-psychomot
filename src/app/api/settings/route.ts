@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { getAdminSession } from "@/lib/auth";
-import { getSiteSettings } from "@/lib/settings";
+import { getSiteSettings, saveSiteSettings } from "@/lib/settings";
 import { siteSettingsSchema } from "@/types/settings";
 
 export async function GET() {
@@ -26,19 +26,11 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    // Si KV est configuré, on persiste sur Upstash Redis / Vercel KV
-    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
-      await fetch(`${process.env.KV_REST_API_URL}/set/site_settings`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(JSON.stringify(parsed.data)),
-      });
-    }
+    // Sauvegarde persistante (locale ou cloud)
+    await saveSiteSettings(parsed.data);
 
-    // Révalidation immédiate du cache de la page d'accueil
+    // Révalidation immédiate du cache de la page d'accueil et du layout
+    revalidatePath("/", "layout");
     revalidatePath("/");
 
     return NextResponse.json({ success: true, updated: parsed.data });
