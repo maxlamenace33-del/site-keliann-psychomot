@@ -1,0 +1,49 @@
+{
+  "alertBanner": {
+    "enabled": false,
+    "message": "Le cabinet sera exceptionnellement fermé pour congés du 1er au 15 août inclus.",
+    "variant": "info"
+  },
+  "contact": {
+    "fullName": "Keliann L'Azou",
+    "title": "Psychomotricien Diplômé d'État",
+    "phone": "06 00 00 00 00",
+    "email": "contact@keliann-psychomot.fr",
+    "address": {
+      "street": "12 Rue de la Santé",
+      "postalCode": "75000",
+      "city": "Paris",
+      "complement": "Bâtiment B, 1er étage avec ascenseur"
+    },
+    "googleMapsUrl": "https://maps.google.com/?q=Keliann+LAzou+Psychomotricien",
+    "doctolibUrl": "https://www.doctolib.fr"
+  },
+  "openingHours": [
+    { "day": "Lundi", "slots": "08:30 - 19:30" },
+    { "day": "Mardi", "slots": "08:30 - 19:30" },
+    { "day": "Mercredi", "slots": "08:30 - 19:30" },
+    { "day": "Jeudi", "slots": "08:30 - 19:30" },
+    { "day": "Vendredi", "slots": "08:30 - 18:30" },
+    { "day": "Samedi & Dimanche", "slots": "Fermé" }
+  ],
+  "pricing": {
+    "bilan": {
+      "amount": 180,
+      "label": "Bilan psychomoteur initial",
+      "description": "Comprend l'anamnèse familiale, la passation des épreuves et tests étalonnés, l'analyse clinique, la rédaction du compte-rendu écrit et l'entretien de restitution."
+    },
+    "seance": {
+      "amount": 45,
+      "label": "Séance de suivi psychomoteur",
+      "duration": "45 minutes"
+    },
+    "reimbursementNote": "La psychomotricité n'est pas prise en charge par la Sécurité Sociale de base. Une prise en charge totale ou partielle est fréquemment assurée par les mutuelles complémentaires (sur présentation de facture) ou par la MDPH (dossier AEEH/PCH)."
+  },
+  "prescriptionNote": "Conformément au Code de la Santé Publique (décret de compétence n° 88-659), le bilan psychomoteur et les séances de rééducation sont réalisés exclusivement sur prescription médicale de votre médecin traitant ou spécialiste.",
+  "legal": {
+    "rpps": "10100000000",
+    "siret": "000 000 000 00000",
+    "legalStatus": "Profession libérale réglementée - Membre d'une association de gestion agréée par l'administration fiscale, acceptant le règlement par chèque et virement bancaire.",
+    "host": "Vercel Inc. / Cloudflare Pages"
+  }
+}
