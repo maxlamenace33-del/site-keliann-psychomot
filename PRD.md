@@ -1,10 +1,11 @@
 # Product Requirement Document (PRD)
 
 ## Projet : Site Vitrine Professionnel - Keliann L'Azou, Psychomotricien D.E.
-- **Statut :** Validé / En cours de développement
+- **Statut :** Phase 1 — Développement V1 (Maquette interactive & Placeholders)
 - **Auteur :** Tech Lead & Product Architect
-- **Cible :** Production Web & Déploiement Cloud (Vercel / Cloudflare Pages)
-- **Version :** 1.0.0
+- **Cible immédiate :** Environnement local & Prévisualisation de recette client
+- **Cible finale (mise en suspens) :** Déploiement Cloud (Vercel / Cloudflare) & Domaine Infomaniak
+- **Version :** 1.1.0
 
 ---
 
@@ -23,7 +24,93 @@ L'objectif principal du projet est de doter Keliann d'une présence en ligne pro
 
 ---
 
-## 2. Utilisateurs Cibles & Personas
+## 2. Feuille de Route & Phasing du Projet (Roadmap V1)
+
+> [!IMPORTANT]
+> **Décision de cadrage produit :** Le projet ne sera **pas déployé en production ni rattaché au nom de domaine Infomaniak** dans l'immédiat. Le cycle de vie du projet est scindé en 4 phases claires afin d'intégrer les allers-retours du praticien sur les textes, photos, fonctionnalités et design.
+
+```mermaid
+flowchart TD
+    subgraph PHASE_1 ["Phase 1 : Développement V1 (Actuelle)"]
+        P1_A[Socle Tokens & Layout] --> P1_B[Découpage modulaire des sections]
+        P1_B --> P1_C[Composants Placeholders Images & Textes]
+        P1_C --> P1_D[Back-office minimaliste /admin & Auth]
+    end
+
+    subgraph PHASE_2 ["Phase 2 : Recette Client & Collecte"]
+        P1_D --> P2_A[Démo locale / Preview interactive à Keliann]
+        P2_A --> P2_B[Collecte des textes définitifs & tarifs]
+        P2_A --> P2_C[Réception des photos HD cabinet & portrait]
+        P2_A --> P2_D[Recueil des retours design & UX]
+    end
+
+    subgraph PHASE_3 ["Phase 3 : Intégration Finale"]
+        P2_B & P2_C & P2_D --> P3_A[Ajustements UI & Réactivité des textes]
+        P3_A --> P3_B[Remplacement placeholders par photos réelles WebP]
+        P3_B --> P3_C[Validation finale du praticien]
+    end
+
+    subgraph PHASE_4 ["Phase 4 : Mise en Ligne (En suspens)"]
+        P3_C --> P4_A[Création projet Vercel / Cloudflare]
+        P4_A --> P4_B[Configuration DNS A/CNAME chez Infomaniak]
+        P4_B --> P4_C[Certificat SSL & Mise en production]
+    end
+
+    style PHASE_1 fill:#E8F0EC,stroke:#5E8B7E,stroke-width:2px
+    style PHASE_2 fill:#FEF3C7,stroke:#D97706,stroke-width:2px
+    style PHASE_3 fill:#E0E7FF,stroke:#4338CA,stroke-width:2px
+    style PHASE_4 fill:#F3F4F6,stroke:#9CA3AF,stroke-dasharray: 5 5
+```
+
+### 2.1 Description des 4 Phases
+
+#### Phase 1 : Socle Technique & Maquette Interactive V1 (En cours)
+- Mise en place du layout complet avec design system Tailwind v4.
+- Développement de l'intégralité des sections avec des **placeholders structurés** (textes temporaires réalistes et cadres photos ergonomiques).
+- Implémentation du back-office `/admin` ultra-léger pour démontrer la capacité d'édition dynamique (horaires, coordonnées, alerte de congés).
+- **Livrable :** Application 100% exécutable en local (`npm run dev` et `npm run build`), propre, sans bug.
+
+#### Phase 2 : Recette Client & Collecte des Actifs Finaux
+- Présentation interactive à Keliann L'Azou.
+- Recueil des retours :
+  - Ajustements de ton ou formulation sur les motifs de consultation et le parcours.
+  - Confirmation du montant des tarifs et durées des bilans.
+  - Remise des photographies officielles (portrait professionnel, vue large de la salle de motricité, vue d'entrée/accueil).
+  - Remise des coordonnées exactes et liens (URL définitive Doctolib, SIRET, RPPS).
+
+#### Phase 3 : Itération Design & Remplacement des Placeholders
+- Intégration des photographies traitées (formats WebP/AVIF optimisés avec `next/image`).
+- Calibrage des espacements et typographies pour s'adapter parfaitement à la longueur des textes réels.
+- Validation finale du rendu par le client.
+
+#### Phase 4 : Mise en Ligne & Domaine Infomaniak (Suspendue jusqu'à validation Phase 3)
+- Création du projet de production sur Vercel (ou Cloudflare Pages).
+- Configuration des enregistrements DNS (Type A et CNAME) dans le tableau de bord Infomaniak.
+- Vérification du certificat SSL Let's Encrypt et tests de performance Lighthouse en conditions réelles.
+
+---
+
+## 3. Matrice des Contenus Attendus du Client (Checklist)
+
+Pour faciliter le travail de collecte auprès de Keliann L'Azou lors de la Phase 2, voici la grille d'inventaire :
+
+| Élément | Type | Statut V1 | Utilisation dans le site |
+| :--- | :--- | :--- | :--- |
+| **Portrait du praticien** | Photo HD (verticale ou carrée) | *Placeholder visuel avec icône* | Section "Qui suis-je ?" |
+| **Salle de consultation** | Photo HD (paysage 16:9 ou 16:10) | *Placeholder visuel avec icône* | Section "Le Cabinet" (vue principale) |
+| **Devanture / Accès** | Photo HD (paysage 4:3) | *Placeholder visuel avec icône* | Vignette 1 "Le Cabinet" |
+| **Salle d'attente** | Photo HD (paysage 4:3) | *Placeholder visuel avec icône* | Vignette 2 "Le Cabinet" |
+| **Biographie / Approche** | Texte court (2 à 3 paragraphes) | *Texte indicatif type* | Section "Qui suis-je ?" |
+| **Citation inspirante** | Phrase courte + auteur | *Citation indicative type* | Bas de la section "Mes Valeurs" |
+| **Lien Doctolib** | URL complète | *URL par défaut (doctolib.fr)* | Bouton Header, Hero et Footer |
+| **Adresse & Accès** | Adresse postale + étage/digicode | *Adresse indicative type* | Colonne "Infos Pratiques" & Footer |
+| **Horaires d'ouverture** | Tableau des créneaux par jour | *Plages indicatives 8h30-19h30* | Colonne "Infos Pratiques" |
+| **Tarifs & Durées** | Bilan et séance individuelle (€) | *180 € bilan / 45 € séance* | Colonne "Infos Pratiques" |
+| **Identifiants légaux** | RPPS & SIRET | *Identifiants factices sécurisés* | Mentions légales Footer |
+
+---
+
+## 4. Utilisateurs Cibles & Personas
 
 | Persona | Profil & Démographie | Problématique / Besoin | Comportement sur le site | Critère de succès |
 | :--- | :--- | :--- | :--- | :--- |
@@ -33,9 +120,9 @@ L'objectif principal du projet est de doter Keliann d'une présence en ligne pro
 
 ---
 
-## 3. Parcours Utilisateurs (User Journeys)
+## 5. Parcours Utilisateurs (User Journeys)
 
-### 3.1 Parcours A : Arrivée par QR Code (Carte de visite)
+### 5.1 Parcours A : Arrivée par QR Code (Carte de visite)
 ```mermaid
 flowchart TD
     Scan([Scan QR Code sur carte physique]) --> Landing[Arrivée immédiate racine /]
@@ -46,150 +133,83 @@ flowchart TD
     NeedDecision -- "Contacter directement" --> ClickTelEmail[Appel ou Email direct]
 ```
 
-### 3.2 Parcours B : Parent orienté par l'école / le pédiatre
-1. Arrivée sur la page d'accueil via recherche locale ou lien partagé.
-2. Lecture du bandeau d'alerte éventuel (ex: "Cabinet ouvert - Prise de RDV disponible").
-3. Scroll vers la section **"La Psychomotricité"** > vérification des cartes **"Dans quelles situations consulter ?"** (repérage immédiat du motif : *Graphisme, TDA/H, Maladresse*).
-4. Validation du cadre médical : le site rappelle la nécessité d'une **prescription médicale**.
-5. Clic sur le CTA fixe ou flottant **"Prendre RDV sur Doctolib"**.
+---
+
+## 6. Spécifications Fonctionnelles Détaillées
+
+### 6.1 Header & Navigation (`#header`)
+- **Logo texte & Titre :** `Keliann L'Azou` (Typographie semi-bold) + `Psychomotricien D.E.` (Badge discret vert sauge).
+- **Navigation Desktop :** `#accueil`, `#qui-suis-je`, `#psychomotricite`, `#infos-pratiques`, `#contact`.
+- **Navigation Mobile :** Menu tiroir tactile avec fermeture au clic d'ancre.
+- **CTA Header :** Bouton `Prendre RDV` vers Doctolib.
+- **Comportement :** `sticky top-0`, fond translucide avec glassmorphism (`backdrop-blur-md`).
+
+### 6.2 Bannière d'Alerte Dynamique (Optionnelle)
+- **Position :** Au-dessus du Header.
+- **Comportement :** Affichée uniquement si `alertBanner.enabled === true`.
+- **Cas d'usage :** "Cabinet fermé pour congés du X au Y", "Ouverture de nouveaux créneaux".
+
+### 6.3 Hero Banner (`#accueil`)
+- **Titre H1 :** Clair, humain et rassurant.
+- **Sous-titre explicatif :** Présentation du rôle de Keliann L'Azou.
+- **Double CTA :** Bouton Doctolib + Lien d'ancrage `#infos-pratiques`.
+- **Visuel d'ambiance :** Cadre visuel soigné prêt à recevoir la photo d'ambiance.
+
+### 6.4 Bandeau des 4 Piliers Fondamentaux
+1. Motricité globale & fine
+2. Graphisme & Apprentissages
+3. Régulation émotionnelle
+4. Confiance & Conscience corporelle
+
+### 6.5 Section "Qui suis-je ?" (`#qui-suis-je`)
+- Texte de présentation du parcours universitaire et de la philosophie de soin.
+- **Encadré Réglementaire :** Obligation stricte de prescription médicale (Code de la Santé Publique).
+- Photo portrait professionnelle du praticien.
+
+### 6.6 Section "Mes Valeurs" & Citation Inspirante
+- Grille de 3 cartes : Écoute & Bienveillance, Approche Holistique, Travail en Réseau.
+- Citation inspirante sur le mouvement et le langage du corps.
+
+### 6.7 Section "La Psychomotricité" (`#psychomotricite`)
+- Définition pédagogique de la discipline.
+- Sous-bloc "Pour qui ?" (3 cartes : Enfants, Adolescents, Adultes & Seniors).
+- Sous-bloc "Dans quelles situations consulter ?" (8 motifs de consultation avec icônes et descriptions).
+
+### 6.8 Section "Informations pratiques & Le Cabinet" (`#infos-pratiques`)
+- Adresse physique avec lien interactif Google Maps.
+- Horaires d'ouverture par jour.
+- Tarifs indicatifs (Bilan et séance).
+- Modalités de prise en charge (Mutuelles et MDPH).
+- Galerie photo : 1 photo principale salle de motricité + 2 vignettes (façade, salle d'attente).
+
+### 6.9 Section "Me Contacter" & Footer (`#contact`)
+- Coordonnées directes (téléphone, email cliquable).
+- Bouton Doctolib.
+- Mentions légales (RPPS, SIRET, hébergeur, conformité RGPD).
+- Lien discret vers l'espace praticien `/admin`.
 
 ---
 
-## 4. Spécifications Fonctionnelles Détaillées
+## 7. Back-Office Simplifié (No-Overengineering)
 
-Le site est conçu comme une **Single Page Application (SPA)** défilante avec ancrage fluide (`scroll-behavior: smooth`) et gestion dynamique d'une bannière d'annonce.
+### 7.1 Philosophie
+Pas de CMS headless complexe ni de blog. Une interface unique sécurisée permettant d'éditer la bannière d'alerte, les coordonnées, les tarifs et les horaires.
 
-### 4.1 Header & Navigation (`#header`)
-- **Logo texte & Titre :** `Keliann L'Azou` (Typographie semi-bold) + `Psychomotricien D.E.` (Badge ou sous-titre discret vert sauge).
-- **Navigation Desktop :**
-  - `#accueil` : Accueil
-  - `#qui-suis-je` : Le Praticien
-  - `#psychomotricite` : La Psychomotricité
-  - `#infos-pratiques` : Cabinet & Tarifs
-  - `#contact` : Contact
-- **Navigation Mobile :** Menu tiroir (Burger menu accessible, touch-friendly, fermeture automatique au clic sur une ancre).
-- **CTA Header :** Bouton mis en avant `Prendre RDV` avec icône calendrier / externe vers Doctolib.
-- **Comportement :** `sticky top-0`, fond translucide blanc crème avec effet glassmorphism (`backdrop-blur-md`), ombre subtile au scroll.
-
-### 4.2 Bannière d'Alerte Dynamique (Optionnelle)
-- **Position :** Tout en haut du viewport (au-dessus du Header) ou intégrée juste sous la navbar.
-- **Comportement :** Affichée uniquement si le paramètre `alert_enabled` est actif en base/configuration.
-- **Cas d'usage :** "Cabinet fermé pour congés du 12 au 26 août", "Ouverture de nouveaux créneaux le mercredi après-midi".
-- **Styles :** Fond vert sauge doux ou ambré discret, texte lisible, bouton de fermeture optionnel.
-
-### 4.3 Hero Section (`#accueil`)
-- **Titre H1 :** Clair, humain et rassurant (ex. : *"Prendre soin du corps et de l'esprit par le mouvement"* ou *"Accompagner le développement psychomoteur à chaque étape de la vie"*).
-- **Sous-titre explicatif :** Présentation du rôle de Keliann L'Azou, cabinet situé à [Ville/Quartier], prise en charge sur-mesure d'enfants, adolescents et adultes.
-- **Double CTA :**
-  - **CTA Primaire :** `Prendre rendez-vous` (Lien direct vers Doctolib avec attributs `rel="noopener noreferrer"`).
-  - **CTA Secondaire :** `Voir le cabinet & Localisation` (Ancre douce vers `#infos-pratiques`).
-- **Visuel d'ambiance :** Image douce et lumineuse représentant l'espace thérapeutique, matériel sensoriel ou dessin épuré illustrant la motricité.
-
-### 4.4 Bandeau des 4 Piliers Fondamentaux
-Disposé immédiatement sous le Hero pour poser les repères clés :
-1. **Motricité globale & fine :** Coordination, équilibre, dissociation, tonus, motricité manuelle.
-2. **Graphisme & Apprentissages :** Tenue du crayon, aisance graphique, repérage spatio-temporel.
-3. **Régulation émotionnelle :** Gestion du stress, anxiété corporelle, hypersensibilité, inhibition.
-4. **Confiance & Conscience corporelle :** Image du corps, affirmation de soi, autonomie au quotidien.
-- **Rendu :** Puces rondes / pastilles aérées avec micro-icônes douces (Lucide React) et typographie apaisante.
-
-### 4.5 Section "Qui suis-je ?" (`#qui-suis-je`)
-Disposition sur 2 colonnes desktop (responsive 1 colonne mobile) :
-- **Colonne Gauche (Texte & Éthique) :**
-  - Parcours et diplôme : Diplôme d'État de Psychomotricien (obtenu après formation universitaire agréée).
-  - Approche thérapeutique bienveillante et ludique.
-  - **Encadré Réglementaire (Déontologie) :** Rappel officiel : *"Conformément à la réglementation française, le bilan et le suivi psychomoteur sont réalisés exclusivement sur prescription médicale de votre médecin traitant ou spécialiste."*
-- **Colonne Droite (Visuel) :**
-  - Photographie professionnelle de Keliann en cabinet, souriant et accueillant.
-  - Badge incrusté : "Praticien Conventionné - Diplômé d'État".
-
-### 4.6 Section "Mes Valeurs" & Citation Inspirante
-- **Grille de 3 Cartes :**
-  1. *Écoute & Bienveillance :* Un espace sécurisant où l'enfant ou l'adulte progresse sans jugement.
-  2. *Approche Holistique :* Intégration globale du corps, des émotions et des fonctions cognitives.
-  3. *Co-construction & Réseau :* Travail étroit avec la famille, l'école et l'équipe pluridisciplinaire.
-- **Bloc Citation :** Typographie stylisée type citation humaniste (ex. inspirée de Julian de Ajuriaguerra ou Giselle Soubiran sur le dialogue corporel).
-
-### 4.7 Section "La Psychomotricité" (`#psychomotricite`)
-- **Bloc 1 : Définition & Schéma Visuel :**
-  - Explication simple : thérapie corporelle qui aide à harmoniser le corps, les émotions et la pensée.
-  - Schéma visuel synthétique : Triangle interactionnel `Corps - Émotion - Cognition`.
-- **Bloc 2 : "Pour qui ?" (3 cartes distinctes) :**
-  1. *Enfants :* Retards de développement moteur, prématurité, troubles des apprentissages (DYS), TDA/H, agitation.
-  2. *Adolescents :* Mal-être corporel, troubles anxieux, manque de repères spatio-temporels, perte de confiance.
-  3. *Adultes & Seniors :* Gestion du stress, troubles du schéma corporel, rééducation neurologique, prévention des chutes.
-- **Bloc 3 : "Dans quelles situations consulter ?" :**
-  - Grille responsive de 8 motifs majeurs :
-    1. Troubles de la coordination motrice (TDC / Dyspraxie)
-    2. Difficultés d'écriture et graphisme (Dysgraphie)
-    3. TDA/H, impulsivité et difficultés attentionnelles
-    4. Maladresse motrice et troubles de l'équilibre
-    5. Difficultés d'organisation spatiale et temporelle
-    6. Troubles du tonus (hypertonie, hypotonie, tics)
-    7. Anxiété, inhibition corporelle, manque d'assurance
-    8. Retard dans les acquisitions motrices chez le jeune enfant
-
-### 4.8 Section "Informations pratiques & Le Cabinet" (`#infos-pratiques`)
-Disposition sur 2 colonnes ergonomiques :
-- **Colonne de gauche (Détails logistiques) :**
-  - **Adresse physique :** Adresse du cabinet avec bouton d'ouverture direct dans Google Maps / Apple Maps.
-  - **Horaires :** Plages d'ouverture claires (ex. Lundi au Vendredi 8h30 - 19h00, Samedi matin).
-  - **Tarifs indicatifs :**
-    - Bilan psychomoteur initial (passation de tests standardisés, rédaction du compte-rendu, restitution aux familles).
-    - Séance de suivi psychomoteur (durée standard 40 à 45 minutes).
-  - **Modalités de remboursement :** Rappel pédagogique indiquant que les actes ne sont pas remboursés par la Sécurité Sociale de base, mais font l'objet d'une prise en charge fréquente par les **mutuelles complémentaires** ou par des dossiers **MDPH** (complément AEEH/PCH).
-- **Colonne de droite (Galerie photos du cabinet) :**
-  - 1 photo principale grand format : Espace de consultation lumineux avec tapis et modules moteurs.
-  - 2 vignettes d'ambiance : Entrée / façade du cabinet et salle d'attente accueillante.
-
-### 4.9 Section "Me Contacter" & Footer (`#contact`)
-- **Coordonnées directes :**
-  - Numéro de téléphone cliquable (`tel:+33...`).
-  - Adresse email professionnelle cliquable (`mailto:...`).
-  - Bouton proéminent "Prendre RDV sur Doctolib".
-- **Mentions légales & Conformité réglementaire :**
-  - Numéro RPPS / ADELI du praticien.
-  - Numéro SIRET du cabinet.
-  - Mention d'appartenance à une association de gestion agréée (le cas échéant).
-  - Nom de l'hébergeur web et politique de confidentialité (RGPD : absence de cookies traceurs publicitaires, pas de données de santé hébergées sur le site vitrine).
-  - Copyright © 2026 Keliann L'Azou. Tous droits réservés.
+### 7.2 Champs Éditables
+1. Bannière d'alerte (activation, message, type).
+2. Contact (téléphone, email, adresse, lien Maps, lien Doctolib).
+3. Horaires d'ouverture.
+4. Tarifs (bilan, séance, note de remboursement).
+5. Note de prescription.
 
 ---
 
-## 5. Back-Office Simplifié (Administration Sans Overengineering)
-
-### 5.1 Philosophie : "Set and Forget"
-Le site ne comporte pas d'articles de blog à alimenter régulièrement. Le praticien ne doit pas perdre de temps avec un CMS lourd (WordPress, Strapi, Sanity). L'objectif est une page unique d'administration protégée pour mettre à jour les constantes du cabinet.
-
-### 5.2 Champs Éditables
-1. **Bannière d'alerte :** Activer/Désactiver (booléen) + Message textuel court.
-2. **Coordonnées :** Numéro de téléphone, adresse email, adresse postale complète, lien URL Google Maps.
-3. **Lien de prise de RDV :** URL Doctolib (permet de basculer vers un lien de pré-inscription ou téléphone si le compte Doctolib est en cours de création).
-4. **Horaires d'ouverture :** Texte libre ou tableau de plages horaires.
-5. **Tarifs :** Montant du bilan et montant de la séance de suivi.
-6. **Note de prescription :** Texte personnalisable rappelant les modalités d'ordonnance.
-
-### 5.3 Sécurité d'accès
-- Route protégée `/admin`.
-- Authentification par mot de passe maître unique défini dans une variable d'environnement (`ADMIN_PASSWORD`), hashé ou validé via cookie de session sécurisé (`httpOnly`, `sameSite=strict`, `secure`).
-
----
-
-## 6. Exigences Non-Fonctionnelles & Performance
+## 8. Exigences Non-Fonctionnelles & Performance
 
 | Critère | Cible | Moyen mis en œuvre |
 | :--- | :--- | :--- |
-| **Performance (Lighthouse)** | Score ≥ 95 sur Mobile et Desktop | Server Components React 19, zéro JS tiers inutile, Tailwind v4 optimisé. |
-| **First Contentful Paint (FCP)** | < 1.0 seconde | Pré-rendu statique (SSG/ISR), polices auto-hébergées avec `next/font`. |
-| **Largest Contentful Paint (LCP)** | < 1.5 seconde | Images servies en WebP/AVIF via `next/image` avec `priority` sur l'image Hero. |
-| **Cumulative Layout Shift (CLS)** | 0.00 | Tailles des conteneurs d'images réservées, styles inline critiques. |
-| **Accessibilité (a11y)** | Conforme WCAG 2.1 AA | Ratios de contraste ≥ 4.5:1 sur les textes, balises ARIA sur les boutons d'ancrage, navigation au clavier. |
-| **Données de santé (RGPD)** | 100% conforme | **Aucune donnée médicale de patient n'est collectée ou stockée sur le site.** Toute prise de RDV est déléguée à Doctolib (hébergeur certifié HDS). |
-
----
-
-## 7. Indicateurs de Succès (KPIs)
-1. **Taux de clic vers Doctolib (Conversion CTA) :** > 12% des visiteurs uniques cliquent sur le bouton de prise de rendez-vous.
-2. **Taux de rebond lors du scan QR Code :** < 25% (l'information clé est vue immédiatement sans quitter la page).
-3. **Temps de chargement mobile sur réseau 4G :** < 1.2s.
-4. **Temps d'administration mensuel :** < 5 minutes (maintenance quasi-nulle).
+| **Performance (Lighthouse)** | Score ≥ 95 | Server Components React 19, zéro bundle inutile, Tailwind v4. |
+| **First Contentful Paint (FCP)** | < 1.0s | Polices optimisées via `next/font`, CSS inline critique. |
+| **Cumulative Layout Shift (CLS)** | 0.00 | Ratios d'aspect réservés pour les photos. |
+| **Accessibilité (a11y)** | Conforme WCAG 2.1 AA | Contrastes > 4.5:1, navigation clavier fluide, balises ARIA. |
+| **Données de santé (RGPD)** | 100% conforme | **Aucune donnée médicale n'est hébergée sur le site.** Prise de RDV déléguée à Doctolib. |

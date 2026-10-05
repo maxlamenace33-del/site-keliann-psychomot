@@ -2,369 +2,161 @@
 
 ## Projet : Site Vitrine Professionnel - Keliann L'Azou, Psychomotricien D.E.
 - **Rôle :** Tech Lead & System Architect
-- **Version :** 1.0.0
-- **Environnement d'exécution :** Node.js 20+ / Edge Runtime / React 19 / Next.js (App Router)
+- **Version :** 1.1.0
+- **Statut d'exécution :** Phase 1 — Développement V1 Local & Itératif
+- **Déploiement en production & DNS :** Mis en suspens temporairement dans l'attente des contenus finaux
 
 ---
 
-## 1. Choix Technologiques & Justifications d'Architecture
+## 1. Feuille de Route Technique & Enchaînement des Branches Git (V1)
 
+Pour garantir une architecture modulaire et un historique Git irréprochable, le développement de la V1 suit un découpage strict par branches de fonctionnalités dérivées de `main`.
+
+```mermaid
+gitGraph
+   commit id: "Initial commit"
+   commit id: "docs(PRD, TECH_SPEC, DESIGN_SYSTEM)"
+   branch feat/design-tokens-and-layout
+   checkout feat/design-tokens-and-layout
+   commit id: "feat(ui): Tokens Tailwind v4, Layout & Page"
+   checkout main
+   merge feat/design-tokens-and-layout id: "merge tokens & layout"
+   branch feat/modular-sections-refactor
+   checkout feat/modular-sections-refactor
+   commit id: "refactor(sections): isolate Hero, Pillars, About, Cabinet"
+   checkout main
+   merge feat/modular-sections-refactor id: "merge modular sections"
+   branch feat/image-placeholders-system
+   checkout feat/image-placeholders-system
+   commit id: "feat(images): ImagePlaceholder component & aspect-ratios"
+   checkout main
+   merge feat/image-placeholders-system id: "merge placeholders"
+   branch feat/admin-auth-and-settings
+   checkout feat/admin-auth-and-settings
+   commit id: "feat(admin): /admin login, master pwd & form settings"
+   checkout main
+   merge feat/admin-auth-and-settings id: "merge admin & auth"
+   branch chore/v1-demo-ready
+   checkout chore/v1-demo-ready
+   commit id: "chore: finalize V1 for client feedback"
 ```
-┌────────────────────────────────────────────────────────────────────────┐
-│                        ARCHITECTURE DU SYSTÈME                         │
-├────────────────────────────────────────────────────────────────────────┤
-│                                                                        │
-│   Visiteur Public              Navigateur Client        Infomaniak     │
-│   (Scan QR / Web)              (React 19 Islands)      (Domaine & DNS) │
-│          │                             ▲                      │        │
-│          ▼                             │ Hydration            ▼        │
-│   ┌──────────────┐          ┌──────────────────────┐   ┌────────────┐  │
-│   │ Vercel / CF  │ ───────> │ Next.js App Router   │ <─┤ DNS CNAME  │  │
-│   │ Edge Network │          │ (Server Components)  │   │ / SSL Auto │  │
-│   └──────────────┘          └──────────────────────┘   └────────────┘  │
-│                                        │                               │
-│                         ┌──────────────┴──────────────┐                │
-│                         ▼                             ▼                │
-│                 Page Publique (SSR/ISR)       Back-office (/admin)     │
-│                 - Zéro JS inutile             - React Hook Form + Zod  │
-│                 - Micro-animations CSS        - Auth JWT / Master Pwd  │
-│                 - Schema.org JSON-LD          - Cookie Session HttpOnly│
-│                         │                             │                │
-│                         └──────────────┬──────────────┘                │
-│                                        ▼                               │
-│                            ┌───────────────────────┐                   │
-│                            │ Dynamic State Layer   │                   │
-│                            │ - Local JSON / KV /   │                   │
-│                            │   Supabase KV Store   │                   │
-│                            │ - Fallback statique   │                   │
-│                            └───────────────────────┘                   │
-└────────────────────────────────────────────────────────────────────────┘
-```
 
-### 1.1 Stack Technique Principale
+### 1.1 Détail des Étapes de Développement V1
 
-| Composant | Technologie | Version | Rationale Technique |
-| :--- | :--- | :--- | :--- |
-| **Framework** | Next.js (App Router) | 16+ / Canary | Server Components par défaut, streaming HTML, génération statique (SSG/ISR), gestion optimisée des métadonnées. |
-| **Moteur UI** | React | 19.x | Actions serveur natives, hooks `useActionState` / `useTransition`, absence de surcharge côté client pour les composants statiques. |
-| **Langage** | TypeScript | 5.x | Typage strict (`strict: true`), typage de bout en bout des paramètres de configuration et formulaires. |
-| **Styling & CSS** | Tailwind CSS | v4 (`@tailwindcss/postcss`) | Moteur CSS haute performance, configuration des tokens via CSS `@theme`, absence de fichier de config complexe, bundle CSS ultra-léger. |
-| **Icônes** | Lucide React | Dernière version | Icônes SVG légères (tree-shakeable), universelles et conformes aux codes visuels de la santé. |
-| **Validation Formulaire** | Zod + React Hook Form | Latest | Schémas de validation typés pour l'administration des paramètres, validation côté client et côté serveur (`z.infer`). |
-| **Sécurité d'accès** | Jose / Web Crypto | Standard | Chiffrement et signature JWT légers, compatibles Edge Runtime sans dépendance native Node lourde. |
+| Étape | Branche Git | Objectif Technique | Dépendances & Livrables | Statut |
+| :--- | :--- | :--- | :--- | :--- |
+| **Étape 1** | `feat/design-tokens-and-layout` | Tokens Tailwind v4 (`globals.css`), Layout racine, `Navbar` responsive, `AlertBanner`, `Footer` déontologique. | `lucide-react`, `zod`, `clsx`, `tailwind-merge`. | ✅ **Terminé & fusionné** |
+| **Étape 2** | `feat/modular-sections-refactor` | Découper `page.tsx` en composants autonomes et maintenables dans `src/components/sections/` (`HeroSection`, `PillarsSection`, `AboutSection`, `ValuesSection`, `PsychomotSection`, `CabinetSection`). | Props typées `SiteSettings`, Server Components isolés. | ⏳ **Étape suivante** |
+| **Étape 3** | `feat/image-placeholders-system` | Créer un composant réutilisable `<ImagePlaceholder />` avec gestion des ratios standards (4:5 portrait, 16:10 cabinet, 4:3 vignettes), shimmer effect et fallback SVG doux. | Prêt pour le switch `next/image` en Phase 3. | ⏳ À venir |
+| **Étape 4** | `feat/admin-auth-and-settings` | Implémenter `/admin/login` avec vérification du mot de passe maître en temps constant, cookie session HttpOnly, formulaire d'édition des paramètres `/admin` avec React Hook Form. | `crypto.timingSafeEqual`, cookies de session. | ⏳ À venir |
+| **Étape 5** | `chore/v1-demo-ready` | Audit de performance local, tests responsive (mobile 375px, tablette 768px, desktop 1280px), documentation du guide de présentation pour Keliann. | Build de production sans erreur, prêt pour démo. | ⏳ À venir |
+| **Phase 2 (Itération)** | *Branche selon retours* | Intégration des retours client : textes réels, ajustements typographiques ou fonctionnels. | Retours Keliann L'Azou. | ⏸️ Post-démo |
+| **Phase 3 (Finalisation)** | `feat/real-content-integration` | Remplacement des placeholders par les photographies HD finales (converties en WebP) et validation finale. | Photos HD livrées. | ⏸️ Post-démo |
+| **Phase 4 (Mise en ligne)** | `chore/production-deployment` | Déploiement Vercel / Cloudflare et configuration DNS A/CNAME chez Infomaniak. | **En suspens jusqu'à validation finale.** | ⏸️ En suspens |
 
 ---
 
-## 2. Modélisation des Données & Schémas TypeScript
+## 2. Architecture des Données & Stratégie des Placeholders
 
-Le site repose sur un schéma de configuration unique (`SiteSettings`) qui alimente la page vitrine. Une stratégie de **fallback statique garanti** est mise en place pour qu'aucune panne de base de données ne puisse rendre le site vitrine indisponible.
+### 2.1 Gestion des Données Textuelles Temporaires
+Le fichier [`src/data/default-settings.json`](file:///Users/max/Desktop/Pro/psychomot/site-keliann-psychomot/src/data/default-settings.json) contient des textes réalistes et crédibles conçus spécialement pour la psychomotricité :
+- Présentation déontologique conforme au décret n° 88-659 du Code de la Santé Publique.
+- 8 motifs de consultation concrets (TDC, dysgraphie, TDA/H, repérage spatio-temporel, tonus).
+- Tarifs indicatifs (180 € bilan / 45 € séance) et mention explicite de remboursement mutuelle/MDPH.
+- Horaires et coordonnées réalistes.
 
-### 2.1 Schéma TypeScript Central (`src/types/settings.ts`)
+Ces données sont injectées dans les composants via `getSiteSettings()` défini dans [`src/lib/settings.ts`](file:///Users/max/Desktop/Pro/psychomot/site-keliann-psychomot/src/lib/settings.ts).
+
+### 2.2 Composant `<ImagePlaceholder />` et Ratios d'Aspect Réservés
+Pour éviter tout effet de décalage de mise en page (*Cumulative Layout Shift - CLS = 0.00*) lorsque les vraies photos seront insérées :
+- **Portrait du praticien :** Format vertical **4:5** (ou 1:1 mobile).
+- **Grande vue du cabinet :** Format paysage **16:10** ou **16:9**.
+- **Vignettes cabinet & façade :** Format paysage **4:3**.
+
+Le composant de placeholder affiche une teinte vert sauge très douce (`bg-sage-50`), une bordure fine (`border border-[#E8E4DC]`), une icône thématique Lucide et un libellé d'aide clair (ex: *"Emplacement Photo Portrait Keliann L'Azou - Format 4:5"*).
+
+---
+
+## 3. Schéma de Données TypeScript Central (`SiteSettings`)
 
 ```typescript
 import { z } from "zod";
 
 export const siteSettingsSchema = z.object({
-  // Bannière d'alerte temporaire
   alertBanner: z.object({
     enabled: z.boolean(),
-    message: z.string().max(250, "Le message ne doit pas dépasser 250 caractères"),
+    message: z.string().max(250),
     variant: z.enum(["info", "warning", "holiday"]).default("info"),
   }),
-
-  // Coordonnées de contact direct
   contact: z.object({
     fullName: z.string().min(1),
     title: z.string().min(1),
-    phone: z.string().regex(/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/, "Numéro de téléphone invalide"),
-    email: z.string().email("Adresse email invalide"),
+    phone: z.string(),
+    email: z.string().email(),
     address: z.object({
       street: z.string().min(1),
       postalCode: z.string().min(4),
       city: z.string().min(1),
       complement: z.string().optional(),
     }),
-    googleMapsUrl: z.string().url("URL Google Maps invalide"),
-    doctolibUrl: z.string().url("URL de prise de RDV invalide"),
+    googleMapsUrl: z.string().url(),
+    doctolibUrl: z.string().url(),
   }),
-
-  // Horaires d'ouverture
   openingHours: z.array(
     z.object({
       day: z.string(),
-      slots: z.string(), // Ex: "08:30 - 19:00" ou "Fermé"
+      slots: z.string(),
     })
   ),
-
-  // Tarifs & Prise en charge
   pricing: z.object({
     bilan: z.object({
       amount: z.number().positive(),
-      label: z.string().default("Bilan psychomoteur complet"),
+      label: z.string(),
       description: z.string(),
     }),
     seance: z.object({
       amount: z.number().positive(),
-      label: z.string().default("Séance de suivi psychomoteur"),
-      duration: z.string().default("40 à 45 minutes"),
+      label: z.string(),
+      duration: z.string(),
     }),
     reimbursementNote: z.string(),
   }),
-
-  // Mentions d'ordonnance et cadre réglementaire
   prescriptionNote: z.string(),
-
-  // Mentions légales & Immatriculation
   legal: z.object({
     rpps: z.string(),
     siret: z.string(),
     legalStatus: z.string(),
-    host: z.string().default("Vercel Inc. / Cloudflare"),
+    host: z.string(),
   }),
 });
 
 export type SiteSettings = z.infer<typeof siteSettingsSchema>;
 ```
 
-### 2.2 Données par Défaut (`src/data/default-settings.json`)
-Ce fichier sert de source de vérité par défaut :
-
-```json
-{
-  "alertBanner": {
-    "enabled": false,
-    "message": "Le cabinet sera fermé pour congés annuels du 1er au 15 août inclus.",
-    "variant": "holiday"
-  },
-  "contact": {
-    "fullName": "Keliann L'Azou",
-    "title": "Psychomotricien Diplômé d'État",
-    "phone": "06 00 00 00 00",
-    "email": "contact@keliann-psychomot.fr",
-    "address": {
-      "street": "12 Rue de la Santé",
-      "postalCode": "75000",
-      "city": "Paris",
-      "complement": "Bâtiment B, 1er étage avec ascenseur"
-    },
-    "googleMapsUrl": "https://maps.google.com/?q=Keliann+LAzou+Psychomotricien",
-    "doctolibUrl": "https://www.doctolib.fr"
-  },
-  "openingHours": [
-    { "day": "Lundi", "slots": "08:30 - 19:30" },
-    { "day": "Mardi", "slots": "08:30 - 19:30" },
-    { "day": "Mercredi", "slots": "08:30 - 19:30" },
-    { "day": "Jeudi", "slots": "08:30 - 19:30" },
-    { "day": "Vendredi", "slots": "08:30 - 18:30" },
-    { "day": "Samedi & Dimanche", "slots": "Fermé" }
-  ],
-  "pricing": {
-    "bilan": {
-      "amount": 180,
-      "label": "Bilan psychomoteur initial",
-      "description": "Comprend l'anamnèse, la passation des tests étalonnés, l'analyse clinique, la rédaction du compte-rendu écrit et l'entretien de restitution."
-    },
-    "seance": {
-      "amount": 45,
-      "label": "Séance de rééducation psychomotrice",
-      "duration": "45 minutes"
-    },
-    "reimbursementNote": "La psychomotricité n'est pas prise en charge par la Sécurité Sociale de base. Une prise en charge totale ou partielle est toutefois fréquemment assurée par les mutuelles complémentaires de santé (factures délivrées à chaque séance) ou par la MDPH dans le cadre d'un dossier AEEH/PCH."
-  },
-  "prescriptionNote": "Conformément au Code de la Santé Publique (décret de compétence n° 88-659), le bilan psychomoteur et les séances de rééducation sont réalisés exclusivement sur prescription médicale de votre médecin traitant ou spécialiste.",
-  "legal": {
-    "rpps": "10100000000",
-    "siret": "000 000 000 00000",
-    "legalStatus": "Profession libérale réglementée - Membre d'une association de gestion agréée acceptant le règlement par chèque et virement.",
-    "host": "Vercel Inc. / Cloudflare Pages"
-  }
-}
-```
-
 ---
 
-## 3. Architecture de Persistance du Back-Office (No-Overengineering)
+## 4. Spécifications du Back-Office Minimaliste (`/admin`)
 
-Pour respecter le principe de frugalité technique ("No Overengineering"), 3 options compatibles sont prises en compte avec une abstraction via repository pattern (`SettingsRepository`) :
-
-### 3.1 Tableau Comparatif des Solutions
-
-| Solution | Complexité | Coût | Vitesse | Recommandation |
-| :--- | :--- | :--- | :--- | :--- |
-| **Option 1 : Vercel KV / Upstash Redis** | Très faible | Gratuit (tier free) | Instantanée (< 10ms) | **Recommandée si hébergement Vercel** (clé unique `site_settings`). |
-| **Option 2 : Supabase (Table unique clé/valeur)** | Faible | Gratuit | Très rapide (< 30ms) | Idéal si besoin d'une interface Supabase studio externe en secours. |
-| **Option 3 : Fichier JSON local / GitHub Commit via API** | Modérée | 0 € / Sans service tiers | Rebuild automatique | Pratique si 100% statique et hébergement Cloudflare Pages gratuit. |
-
-### 3.2 Implémentation du Provider (`src/lib/settings.ts`)
-
-```typescript
-import defaultSettings from "@/data/default-settings.json";
-import { SiteSettings, siteSettingsSchema } from "@/types/settings";
-
-export async function getSiteSettings(): Promise<SiteSettings> {
-  try {
-    // Si Upstash Redis / Vercel KV est configuré dans l'environnement
-    if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
-      const response = await fetch(`${process.env.KV_REST_API_URL}/get/site_settings`, {
-        headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` },
-        next: { tags: ["settings"], revalidate: 60 },
-      });
-      const data = await response.json();
-      if (data?.result) {
-        const parsed = siteSettingsSchema.safeParse(JSON.parse(data.result));
-        if (parsed.success) return parsed.data;
-      }
-    }
-  } catch (error) {
-    console.error("Erreur lors de la récupération des paramètres dynamiques, fallback JSON actif:", error);
-  }
-  return defaultSettings as SiteSettings;
-}
-```
-
----
-
-## 4. Spécification des Routes API & Authentification Minimaliste
-
-### 4.1 Authentification du Praticien (`/admin`)
-- **Pas de base de données d'utilisateurs lourde :** Un unique administrateur (Keliann).
-- **Mécanisme :**
-  - Formulaire de connexion sur `/admin/login`.
-  - Comparaison du mot de passe avec `process.env.ADMIN_PASSWORD` via comparaison sécurisée en temps constant (`crypto.timingSafeEqual`) pour prévenir les attaques temporelles (timing attacks).
-  - Génération d'un token de session signé (HMAC-SHA256) stocké dans un cookie `httpOnly`, `secure`, `sameSite: "lax"`, expiration à 7 jours.
+### 4.1 Authentification par Mot de Passe Maître
+- **Objectif :** Zéro gestion d'utilisateurs complexe.
+- **Accès :** `/admin/login`.
+- **Validation :** Comparaison de chaîne sécurisée via `crypto.timingSafeEqual` avec `process.env.ADMIN_PASSWORD`.
+- **Session :** Cookie `admin_session` chiffré ou signé avec `process.env.AUTH_SECRET`, sécurisé (`httpOnly`, `sameSite: "lax"`, `path: "/"`).
 
 ### 4.2 Endpoints API
-
-#### `POST /api/auth/login`
-- **Payload :** `{ password: string }`
-- **Validation :** Vérification contre `ADMIN_PASSWORD`.
-- **Réponse 200 :** Cookie `auth_session` positionné, `{ success: true }`.
-- **Réponse 401 :** `{ error: "Mot de passe incorrect" }`.
-- **Sécurité :** Rate-limit de 5 tentatives par tranche de 15 minutes par IP.
-
-#### `POST /api/auth/logout`
-- **Comportement :** Suppression du cookie de session.
-
-#### `GET /api/settings`
-- **Accès :** Public ou restreint aux composants internes.
-- **Réponse 200 :** Objet `SiteSettings` sérialisé.
-
-#### `PUT /api/settings`
-- **Accès :** Protégé par middleware de session.
-- **Payload :** Objet `SiteSettings` partiel ou complet validé par `siteSettingsSchema`.
-- **Comportement :** Enregistrement dans le store (KV / DB), appel de `revalidateTag("settings")` pour purger le cache ISR de la page publique.
-- **Réponse 200 :** `{ success: true, updated: SiteSettings }`.
+- `POST /api/auth/login` : Vérifie le mot de passe et crée la session.
+- `POST /api/auth/logout` : Détruit le cookie de session.
+- `GET /api/settings` : Récupère la configuration courante.
+- `PUT /api/settings` : Met à jour la configuration et purge le cache ISR (`revalidateTag("settings")`).
 
 ---
 
-## 5. SEO, Métadonnées & Données Structurées Schema.org
+## 5. Stratégie de Démonstration Locale (Sans Déploiement Cloud)
 
-### 5.1 Balises Open Graph & Twitter Cards
-Le site configure la balise `metadata` dans `src/app/layout.tsx` :
-
-```typescript
-export const metadata: Metadata = {
-  metadataBase: new URL("https://keliann-psychomot.fr"),
-  title: {
-    default: "Keliann L'Azou | Psychomotricien D.E. - Cabinet de Psychomotricité",
-    template: "%s | Keliann L'Azou Psychomotricien",
-  },
-  description: "Cabinet de psychomotricité de Keliann L'Azou, Psychomotricien Diplômé d'État. Bilans psychomoteurs et rééducation pour enfants, adolescents et adultes sur prescription médicale.",
-  keywords: [
-    "Psychomotricien",
-    "Psychomotricité",
-    "Bilan psychomoteur",
-    "Keliann L'Azou",
-    "Troubles des apprentissages",
-    "TDAH",
-    "Dysgraphie",
-    "Dyspraxie",
-    "Rééducation motrice",
-  ],
-  authors: [{ name: "Keliann L'Azou" }],
-  openGraph: {
-    type: "website",
-    locale: "fr_FR",
-    url: "https://keliann-psychomot.fr",
-    title: "Keliann L'Azou | Psychomotricien Diplômé d'État",
-    description: "Accompagnement du nourrisson à l'adulte : motricité, apprentissages, régulation émotionnelle.",
-    siteName: "Keliann L'Azou Psychomotricien",
-    images: [
-      {
-        url: "/images/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Cabinet de Psychomotricité - Keliann L'Azou",
-      },
-    ],
-  },
-};
-```
-
-### 5.2 JSON-LD Schema.org (`MedicalBusiness`)
-Intégré dans le layout racine pour optimiser le référencement local et Google Maps :
-
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "MedicalBusiness",
-  "name": "Keliann L'Azou - Psychomotricien Diplômé d'État",
-  "image": "https://keliann-psychomot.fr/images/cabinet-hero.webp",
-  "medicalSpecialty": "Psychomotor Therapy",
-  "telephone": "+33600000000",
-  "email": "contact@keliann-psychomot.fr",
-  "url": "https://keliann-psychomot.fr",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "12 Rue de la Santé",
-    "addressLocality": "Paris",
-    "postalCode": "75000",
-    "addressCountry": "FR"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 48.8566,
-    "longitude": 2.3522
-  },
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      "opens": "08:30",
-      "closes": "19:30"
-    }
-  ],
-  "priceRange": "$$"
-}
-```
-
----
-
-## 6. Stratégie d'Optimisation des Images (`next/image`)
-
-Toutes les images sont servies via le composant natif `next/image` pour garantir le respect des Core Web Vitals :
-- **Hero Image :** `priority={true}` avec conversion automatique AVIF/WebP.
-- **Portraits & Cabinet :** `loading="lazy"`, attributs `sizes="(max-width: 768px) 100vw, 50vw"`.
-- **Effet de chargement doux :** `placeholder="blur"` avec Data URLs floues générées lors de la phase de build.
-
----
-
-## 7. Déploiement & Configuration DNS Infomaniak
-
-Le client détiendra le nom de domaine chez le registrar **Infomaniak**.
-
-### 7.1 Configuration DNS (Enregistrements pour Vercel / Cloudflare)
-| Type | Nom d'hôte (Host) | Valeur / Cible | TTL |
-| :--- | :--- | :--- | :--- |
-| **A** | `@` (racine) | `76.76.21.21` (si Vercel) | 300 |
-| **CNAME** | `www` | `cname.vercel-dns.com.` (si Vercel) | 300 |
-| **CAA** | `@` | `0 issue "letsencrypt.org"` | 300 |
-
-### 7.2 Configuration HTTPS & HSTS
-- Génération automatique du certificat SSL/TLS Let's Encrypt géré par la plateforme cloud.
-- Activation de la redirection forcée HTTP vers HTTPS.
-- Headers de sécurité stricts configurés dans `next.config.ts` :
-  - `X-Frame-Options: DENY`
-  - `X-Content-Type-Options: nosniff`
-  - `Referrer-Policy: strict-origin-when-cross-origin`
-  - `Permissions-Policy: camera=(), microphone=(), geolocation=()`
+En attendant la validation par le praticien :
+1. **Exécution locale :** Le site s'exécute sur machine locale via `npm run dev` (port 3000).
+2. **Preview partagée sans DNS (si nécessaire pour le client) :**
+   - Possibilité de déployer un aperçu temporaire sur une URL automatique Vercel (`*.vercel.app`) sans lier le nom de domaine Infomaniak.
+   - Ou partage local via tunnel temporaire (ex. `localtunnel` ou `ngrok`).
+3. **Mise en suspens explicite de la configuration DNS Infomaniak :**
+   - Aucune modification de la zone DNS d'Infomaniak ne sera effectuée tant que les textes et photos ne sont pas validés.
