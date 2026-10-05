@@ -1,5 +1,6 @@
-import { Users, FileText, Activity } from "lucide-react";
+import { Users, FileText, UserCheck } from "lucide-react";
 import { SiteSettings } from "@/types/settings";
+import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 
 interface AboutSectionProps {
   settings: SiteSettings;
@@ -45,21 +46,25 @@ export function AboutSection({ settings }: AboutSectionProps) {
           </div>
         </div>
 
-        {/* Colonne Droite : Visuel Praticien */}
+        {/* Colonne Droite : Visuel Praticien avec Placeholder calibré 4:5 */}
         <div className="lg:col-span-5 flex flex-col items-center">
-          <div className="w-full aspect-[4/5] bg-gradient-to-tr from-sage-100 to-teal-soft/40 rounded-3xl border border-[#E8E4DC] p-4 flex flex-col justify-end relative shadow-sm overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center text-sage-600/40">
-              <Activity className="w-24 h-24 stroke-1" />
-            </div>
-            <div className="relative z-10 bg-white/90 backdrop-blur-sm p-5 rounded-2xl border border-white/80 shadow-sm">
-              <p className="font-bold text-[#232B28]">{settings.contact.fullName}</p>
-              <p className="text-xs text-sage-700 font-medium">Psychomotricien D.E.</p>
-              <div className="mt-2 pt-2 border-t border-[#E8E4DC] flex items-center justify-between text-[11px] text-[#58625E]">
-                <span>Cabinet libéral</span>
-                <span>Conventionné</span>
+          <ImagePlaceholder
+            aspectRatio="4/5"
+            icon={UserCheck}
+            label={`Portrait de ${settings.contact.fullName}`}
+            subLabel="Photo portrait en cabinet (recommandé : 1200 x 1500 px)"
+            badge="Photo Praticien (Attente Phase 2)"
+            overlayContent={
+              <div className="bg-white/95 backdrop-blur-sm p-4 rounded-xl border border-[#E8E4DC] shadow-sm">
+                <p className="font-bold text-sm text-[#232B28]">{settings.contact.fullName}</p>
+                <p className="text-xs text-sage-700 font-medium">Psychomotricien D.E.</p>
+                <div className="mt-2 pt-2 border-t border-[#E8E4DC] flex items-center justify-between text-[11px] text-[#58625E]">
+                  <span>Cabinet libéral</span>
+                  <span>Conventionné</span>
+                </div>
               </div>
-            </div>
-          </div>
+            }
+          />
         </div>
       </div>
     </section>

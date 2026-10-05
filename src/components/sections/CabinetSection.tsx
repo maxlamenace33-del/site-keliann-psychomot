@@ -1,5 +1,6 @@
-import { MapPin, Clock, Euro, Sparkles, Activity, ExternalLink } from "lucide-react";
+import { MapPin, Clock, Euro, Sparkles, ExternalLink, Activity, DoorOpen, Coffee } from "lucide-react";
 import { SiteSettings } from "@/types/settings";
+import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 
 interface CabinetSectionProps {
   settings: SiteSettings;
@@ -79,25 +80,33 @@ export function CabinetSection({ settings }: CabinetSectionProps) {
             </div>
           </div>
 
-          {/* Colonne Droite : Galerie Photos Cabinet */}
+          {/* Colonne Droite : Galerie Photos Cabinet avec Placeholders calibrés */}
           <div className="space-y-4 flex flex-col justify-between">
-            {/* Photo Principale */}
-            <div className="aspect-[16/10] bg-gradient-to-br from-sage-100 to-teal-soft/30 rounded-2xl border border-[#E8E4DC] flex items-center justify-center p-6 text-center text-sage-700">
-              <div className="space-y-2">
-                <Activity className="w-12 h-12 mx-auto stroke-1 opacity-70" />
-                <p className="text-sm font-semibold">Salle de consultation & Matériel moteur</p>
-                <p className="text-xs text-[#58625E]">Un espace spacieux, lumineux et sécurisant</p>
-              </div>
-            </div>
+            {/* Photo Principale : Salle de consultation (16:10) */}
+            <ImagePlaceholder
+              aspectRatio="16/10"
+              icon={Activity}
+              label="Salle de consultation & Matériel moteur"
+              subLabel="Vue d'ensemble de la salle (recommandé : 1920 x 1200 px)"
+              badge="Photo Principale (Attente Phase 2)"
+            />
 
-            {/* 2 Vignettes */}
+            {/* 2 Vignettes : Devanture & Salle d'attente (4:3) */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="aspect-[4/3] bg-gradient-to-br from-[#F7F5F0] to-sage-50 rounded-xl border border-[#E8E4DC] flex items-center justify-center p-3 text-center">
-                <p className="text-xs text-[#58625E] font-medium">Devanture & Accès PMR</p>
-              </div>
-              <div className="aspect-[4/3] bg-gradient-to-br from-[#F7F5F0] to-teal-soft/20 rounded-xl border border-[#E8E4DC] flex items-center justify-center p-3 text-center">
-                <p className="text-xs text-[#58625E] font-medium">Salle d&apos;attente paisible</p>
-              </div>
+              <ImagePlaceholder
+                aspectRatio="4/3"
+                icon={DoorOpen}
+                label="Devanture & Accès"
+                subLabel="Accès PMR (800 x 600 px)"
+                badge="Vignette 1"
+              />
+              <ImagePlaceholder
+                aspectRatio="4/3"
+                icon={Coffee}
+                label="Salle d'attente"
+                subLabel="Espace accueil (800 x 600 px)"
+                badge="Vignette 2"
+              />
             </div>
 
             {/* Bouton Google Maps */}
