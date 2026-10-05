@@ -35,14 +35,37 @@ Chaque étape est développée sur une branche Git dédiée avant fusion dans `m
 
 ## 📋 Checklist des Contenus Attendus du Client (Phase 2)
 
-Pour passer à la version finale de production, les éléments suivants seront recueillis auprès de Keliann :
-- [ ] **Photo Portrait :** Format vertical (ratio 4:5), haute résolution, regard bienveillant.
-- [ ] **Photo Salle de consultation :** Format paysage (ratio 16:10), grand angle mettant en valeur le matériel moteur.
-- [ ] **2 Photos d'ambiance :** Entrée du cabinet (accès PMR) et salle d'attente (ratio 4:3).
-- [ ] **Textes personnalisés :** Biographie courte, éventuelles spécialisations spécifiques (bébés, graphisme...).
-- [ ] **Lien Doctolib :** URL officielle de son profil de réservation.
-- [ ] **Tarifs & Coordonnées :** Montant définitif du bilan et des séances, adresse exacte et numéro de téléphone pro.
-- [ ] **Identifiants légaux :** Numéro RPPS et numéro SIRET.
+Cette checklist correspond exactement aux 5 points du mail de cadrage transmis à Keliann L'Azou pour finaliser les contenus :
+
+#### 1. Identité légale & Santé
+- [ ] **Titre exact :** Titre officiel (ex. *Keliann L'Azou – Psychomotricien Diplômé d'État*)
+- [ ] **Numéro RPPS (ou ADELI) :** Identifiant professionnel de santé
+- [ ] **Numéro SIRET :** Dès son attribution administrative
+- [ ] **Formule exacte pour l'ordonnance :** Formule réglementaire (ex. *« Bilan psychomoteur et rééducation si nécessaire »*)
+
+#### 2. Pratique & Textes du cabinet
+- [ ] **Section « Qui suis-je ? » :** 2 petits paragraphes sur son parcours, son école et son approche
+- [ ] **3 Valeurs clés :** 3 mots ou concepts forts avec une phrase explicative pour chacun
+- [ ] **Citation ou phrase d'accroche :** Une phrase inspirante qui résume sa vision
+- [ ] **Les 8 motifs de consultation :** Titre court + 1 ou 2 phrases pour chaque situation (difficultés motrices, écriture/graphisme, attention, anxiété, etc.)
+
+#### 3. Tarifs & Remboursements
+- [ ] **Tarif du bilan initial complet :** Montant en € (tests étalonnés + compte-rendu écrit + restitution)
+- [ ] **Tarif de la séance de suivi :** Montant en € et durée exacte (40 ou 45 min)
+- [ ] **Note d'information mutuelles / aides :** Modalités de prise en charge (mutuelles complémentaires, dossiers MDPH, PCO...)
+
+#### 4. Accès, Contact & Prise de rendez-vous
+- [ ] **Lien Doctolib :** URL exacte du profil de réservation en ligne (dès activation)
+- [ ] **Adresse précise du cabinet :** Numéro, rue, code postal, ville, étage, interphone, bâtiment et accès PMR
+- [ ] **Lien Google Maps direct :** URL de la fiche d'établissement Maps
+- [ ] **Coordonnées directes :** Numéro de téléphone pro et adresse email du cabinet
+- [ ] **Horaires d'ouverture habituels :** Plages horaires par jour de la semaine
+
+#### 5. Photos & Médias (haute définition)
+- [ ] **Photo 1/4 (Portrait) :** Photo portrait sobre et avenante (format vertical 4:5 • 1200x1500px)
+- [ ] **Photo 2/4 (Salle de consultation) :** Photo grand angle de la salle principale / espace moteur (format paysage 16:10 • 1920x1200px)
+- [ ] **Photo 3/4 (Devanture) :** Photo de l'entrée du cabinet / accès PMR (format 4:3 • 800x600px)
+- [ ] **Photo 4/4 (Salle d'attente) :** Photo de l'espace d'accueil (format 4:3 • 800x600px)
 
 ---
 

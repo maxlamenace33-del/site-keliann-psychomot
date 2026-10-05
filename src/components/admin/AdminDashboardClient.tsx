@@ -344,14 +344,14 @@ export function AdminDashboardClient({ initialSettings }: AdminDashboardClientPr
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-[#232B28]">Montant du Bilan Psychomoteur (€)</label>
                 <input
-                  type="number"
+                  type="text"
                   value={formData.pricing.bilan.amount}
                   onChange={(e) =>
                     setFormData({
                       ...formData,
                       pricing: {
                         ...formData.pricing,
-                        bilan: { ...formData.pricing.bilan, amount: Number(e.target.value) },
+                        bilan: { ...formData.pricing.bilan, amount: e.target.value },
                       },
                     })
                   }
@@ -362,14 +362,14 @@ export function AdminDashboardClient({ initialSettings }: AdminDashboardClientPr
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-[#232B28]">Montant de la Séance (€)</label>
                 <input
-                  type="number"
+                  type="text"
                   value={formData.pricing.seance.amount}
                   onChange={(e) =>
                     setFormData({
                       ...formData,
                       pricing: {
                         ...formData.pricing,
-                        seance: { ...formData.pricing.seance, amount: Number(e.target.value) },
+                        seance: { ...formData.pricing.seance, amount: e.target.value },
                       },
                     })
                   }

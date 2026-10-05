@@ -1,49 +1,49 @@
 {
   "alertBanner": {
     "enabled": false,
-    "message": "Le cabinet sera exceptionnellement fermé pour congés du 1er au 15 août inclus.",
+    "message": "[Bannière d'alerte ou congés — message en attente]",
     "variant": "info"
   },
   "contact": {
     "fullName": "Keliann L'Azou",
     "title": "Psychomotricien Diplômé d'État",
-    "phone": "06 00 00 00 00",
-    "email": "contact@keliann-psychomot.fr",
+    "phone": "06 -- -- -- -- (En attente)",
+    "email": "contact@keliann-lazou-psychomot.fr (En attente)",
     "address": {
-      "street": "12 Rue de la Santé",
-      "postalCode": "75000",
-      "city": "Paris",
-      "complement": "Bâtiment B, 1er étage avec ascenseur"
+      "street": "[Numéro et rue du cabinet en attente]",
+      "postalCode": "[Code postal]",
+      "city": "[Ville du cabinet]",
+      "complement": "[Étage, interphone, bâtiment & accès PMR en attente]"
     },
-    "googleMapsUrl": "https://maps.google.com/?q=Keliann+LAzou+Psychomotricien",
+    "googleMapsUrl": "#",
     "doctolibUrl": "https://www.doctolib.fr"
   },
   "openingHours": [
-    { "day": "Lundi", "slots": "08:30 - 19:30" },
-    { "day": "Mardi", "slots": "08:30 - 19:30" },
-    { "day": "Mercredi", "slots": "08:30 - 19:30" },
-    { "day": "Jeudi", "slots": "08:30 - 19:30" },
-    { "day": "Vendredi", "slots": "08:30 - 18:30" },
+    { "day": "Lundi", "slots": "[Horaires en attente]" },
+    { "day": "Mardi", "slots": "[Horaires en attente]" },
+    { "day": "Mercredi", "slots": "[Horaires en attente]" },
+    { "day": "Jeudi", "slots": "[Horaires en attente]" },
+    { "day": "Vendredi", "slots": "[Horaires en attente]" },
     { "day": "Samedi & Dimanche", "slots": "Fermé" }
   ],
   "pricing": {
     "bilan": {
-      "amount": 180,
-      "label": "Bilan psychomoteur initial",
-      "description": "Comprend l'anamnèse familiale, la passation des épreuves et tests étalonnés, l'analyse clinique, la rédaction du compte-rendu écrit et l'entretien de restitution."
+      "amount": "XX",
+      "label": "Bilan psychomoteur complet (tests + restitution)",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bilan initial complet en attente du descriptif exact de Keliann."
     },
     "seance": {
-      "amount": 45,
+      "amount": "XX",
       "label": "Séance de suivi psychomoteur",
-      "duration": "45 minutes"
+      "duration": "40 ou 45 min (à préciser)"
     },
-    "reimbursementNote": "La psychomotricité n'est pas prise en charge par la Sécurité Sociale de base. Une prise en charge totale ou partielle est fréquemment assurée par les mutuelles complémentaires (sur présentation de facture) ou par la MDPH (dossier AEEH/PCH)."
+    "reimbursementNote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. La psychomotricité n'est pas remboursée par la Sécurité Sociale de base. Une prise en charge peut être accordée par les mutuelles complémentaires de santé ou par des dispositifs d'aide (MDPH, PCO). Informations définitives en attente."
   },
-  "prescriptionNote": "Conformément au Code de la Santé Publique (décret de compétence n° 88-659), le bilan psychomoteur et les séances de rééducation sont réalisés exclusivement sur prescription médicale de votre médecin traitant ou spécialiste.",
+  "prescriptionNote": "« Bilan psychomoteur et rééducation si nécessaire » — Conformément au Code de la Santé Publique, la prise en charge en psychomotricité s'effectue sur prescription médicale obligatoire délivrée par votre médecin traitant ou spécialiste.",
   "legal": {
-    "rpps": "10100000000",
-    "siret": "000 000 000 00000",
-    "legalStatus": "Profession libérale réglementée - Membre d'une association de gestion agréée par l'administration fiscale, acceptant le règlement par chèque et virement bancaire.",
+    "rpps": "[RPPS : en attente d'attribution]",
+    "siret": "[SIRET : en cours d'attribution]",
+    "legalStatus": "Profession libérale réglementée — Membre d'une association de gestion agréée.",
     "host": "Vercel Inc. / Cloudflare Pages"
   }
 }

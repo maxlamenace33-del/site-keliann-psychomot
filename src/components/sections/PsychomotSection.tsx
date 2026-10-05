@@ -3,36 +3,44 @@ import { Compass, CheckCircle2 } from "lucide-react";
 export function PsychomotSection() {
   const motifs = [
     {
-      title: "Troubles de la coordination (TDC / Dyspraxie)",
-      desc: "Difficultés d'habillage, maladresse motrice récurrente, chutes fréquentes, dysharmonie des gestes.",
+      domain: "Motricité & Coordination",
+      title: "Difficultés motrices & maladresse (ex: TDC / Dyspraxie)",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. [1 ou 2 phrases explicatives en attente de Keliann]",
     },
     {
-      title: "Difficultés d'écriture (Dysgraphie)",
-      desc: "Lenteur, douleur à la tenue du crayon, écriture illisible ou fatigue précoce lors du travail scolaire.",
+      domain: "Graphisme & Apprentissages",
+      title: "Écriture et graphisme (ex: Dysgraphie, lenteur, douleur)",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. [1 ou 2 phrases explicatives en attente de Keliann]",
     },
     {
-      title: "TDA/H & Impulsivité",
-      desc: "Agitation motrice permanente, difficultés de canalisation de l'énergie et d'inhibition des gestes.",
+      domain: "Attention & Impulsivité",
+      title: "Attention, agitation motrice (ex: TDA/H, canalisation)",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. [1 ou 2 phrases explicatives en attente de Keliann]",
     },
     {
-      title: "Organisation spatio-temporelle",
-      desc: "Difficultés à se situer dans l'espace, à gérer le temps, inversions de repères droite/gauche.",
+      domain: "Émotions & Corps",
+      title: "Anxiété corporelle, gestion du stress et inhibition",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. [1 ou 2 phrases explicatives en attente de Keliann]",
     },
     {
-      title: "Régulation tonico-émotionnelle",
-      desc: "Hypertonie, tics, bégaiement moteur, crispations posturales liées à l'anxiété ou au perfectionnisme.",
+      domain: "Repérage & Organisation",
+      title: "Organisation spatio-temporelle et repères",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. [1 ou 2 phrases explicatives en attente de Keliann]",
     },
     {
-      title: "Schéma corporel & Estime de soi",
-      desc: "Mauvaise perception de son propre corps, complexe d'image corporelle, inhibition ou timidité motrice.",
+      domain: "Tonus & Posture",
+      title: "Troubles du tonus, crispations et tics moteurs",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. [1 ou 2 phrases explicatives en attente de Keliann]",
     },
     {
-      title: "Retard de développement psychomoteur",
-      desc: "Retard des acquisitions posturales (retournement, position assise, 4 pattes, marche autonome).",
+      domain: "Petite Enfance",
+      title: "Retard dans les acquisitions psychomotrices du jeune enfant",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. [1 ou 2 phrases explicatives en attente de Keliann]",
     },
     {
-      title: "Perte d'autonomie chez l'adulte & senior",
-      desc: "Troubles de l'équilibre, prévention des chutes, réappropriation corporelle post-AVC ou traumatisme.",
+      domain: "Adultes & Aînés",
+      title: "Troubles de l'équilibre et autonomie corporelle",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. [1 ou 2 phrases explicatives en attente de Keliann]",
     },
   ];
 
@@ -41,31 +49,30 @@ export function PsychomotSection() {
       <div className="text-center max-w-3xl mx-auto space-y-4">
         <div className="inline-flex items-center gap-2 text-xs font-semibold text-sage-700 uppercase tracking-wider bg-sage-50 px-3 py-1 rounded-full">
           <Compass className="w-3.5 h-3.5" />
-          <span>Comprendre la discipline</span>
+          <span>La Psychomotricité</span>
         </div>
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#232B28]">
           Qu&apos;est-ce que la Psychomotricité ?
         </h2>
         <p className="text-base text-[#58625E] leading-relaxed">
-          La psychomotricité est une profession de santé paramédicale qui s&apos;intéresse aux liens
-          indissociables entre les fonctions motrices, sensorielles, affectives et intellectuelles.
+          La psychomotricité est une profession paramédicale réglementée qui s&apos;intéresse aux liens
+          entre le corps, les émotions et les fonctions cognitives. Elle s&apos;exerce exclusivement sur prescription médicale.
         </p>
       </div>
 
       {/* Sous-bloc : Pour qui ? */}
       <div className="space-y-6">
         <h3 className="text-xl font-bold text-[#232B28] text-center">
-          À qui s&apos;adresse le cabinet ?
+          Pour qui ?
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="p-6 rounded-2xl bg-white border border-[#E8E4DC] space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-sage-600 bg-sage-50 px-2.5 py-1 rounded-md inline-block">
               Enfants
             </span>
-            <h4 className="text-lg font-semibold text-[#232B28]">Bébés & Enfants d&apos;âge scolaire</h4>
+            <h4 className="text-lg font-semibold text-[#232B28]">Bébés & Enfants</h4>
             <p className="text-sm text-[#58625E] leading-relaxed">
-              Retards d&apos;acquisitions, troubles DYS (dyspraxie, dysgraphie), TDA/H, maladresse,
-              agitation ou difficultés dans les apprentissages scolaires.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Retard moteur, troubles des apprentissages (DYS), difficultés graphiques ou attentionnelles.
             </p>
           </div>
 
@@ -75,8 +82,7 @@ export function PsychomotSection() {
             </span>
             <h4 className="text-lg font-semibold text-[#232B28]">Adolescents & Jeunes Adultes</h4>
             <p className="text-sm text-[#58625E] leading-relaxed">
-              Mal-être corporel, gestion de l&apos;anxiété et du stress, perte de repères, organisation
-              spatio-temporelle pour les études ou les examens.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mal-être corporel, anxiété, perte de repères, organisation et confiance en soi.
             </p>
           </div>
 
@@ -84,10 +90,9 @@ export function PsychomotSection() {
             <span className="text-xs font-bold uppercase tracking-wider text-[#58625E] bg-[#EFECE6] px-2.5 py-1 rounded-md inline-block">
               Adultes & Seniors
             </span>
-            <h4 className="text-lg font-semibold text-[#232B28]">Adultes & Personnes Âgées</h4>
+            <h4 className="text-lg font-semibold text-[#232B28]">Adultes & Seniors</h4>
             <p className="text-sm text-[#58625E] leading-relaxed">
-              Tensions physiques chroniques, burn-out, rééducation neurologique, troubles de l&apos;équilibre
-              et maintien de l&apos;autonomie.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Gestion du stress, rééducation neurologique, équilibre et maintien de l&apos;autonomie.
             </p>
           </div>
         </div>
@@ -97,10 +102,10 @@ export function PsychomotSection() {
       <div className="space-y-6">
         <div className="text-center space-y-2">
           <h3 className="text-xl font-bold text-[#232B28]">
-            Dans quelles situations consulter ?
+            Dans quelles situations consulter ? (8 Motifs de consultation)
           </h3>
           <p className="text-sm text-[#58625E]">
-            Exemples fréquents de motifs amenant à réaliser un bilan psychomoteur.
+            Situations fréquentes justifiant la réalisation d&apos;un bilan psychomoteur en cabinet.
           </p>
         </div>
 
@@ -108,12 +113,17 @@ export function PsychomotSection() {
           {motifs.map((motif, i) => (
             <div
               key={i}
-              className="p-5 rounded-2xl bg-white border border-[#E8E4DC] hover:border-sage-400 hover:shadow-sm transition-all duration-200 flex flex-col justify-between space-y-3"
+              className="p-5 rounded-2xl bg-white border border-[#E8E4DC] hover:border-sage-400 hover:shadow-2xs transition-all duration-200 flex flex-col justify-between space-y-3"
             >
               <div className="space-y-2">
-                <div className="flex items-center gap-2 text-sage-600 font-semibold text-xs">
-                  <CheckCircle2 className="w-4 h-4 text-teal-dark shrink-0" />
-                  <span>Motif {i + 1}</span>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="flex items-center gap-1.5 text-sage-700 font-semibold">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-teal-dark shrink-0" />
+                    <span>Motif {i + 1}</span>
+                  </span>
+                  <span className="text-[10px] text-[#58625E]/70 font-medium">
+                    {motif.domain}
+                  </span>
                 </div>
                 <h4 className="font-semibold text-sm text-[#232B28] leading-snug">
                   {motif.title}

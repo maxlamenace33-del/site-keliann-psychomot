@@ -10,15 +10,15 @@ export const siteSettingsSchema = z.object({
     fullName: z.string().min(1),
     title: z.string().min(1),
     phone: z.string(),
-    email: z.string().email(),
+    email: z.string(),
     address: z.object({
       street: z.string().min(1),
-      postalCode: z.string().min(4),
+      postalCode: z.string(),
       city: z.string().min(1),
       complement: z.string().optional(),
     }),
-    googleMapsUrl: z.string().url(),
-    doctolibUrl: z.string().url(),
+    googleMapsUrl: z.string(),
+    doctolibUrl: z.string(),
   }),
   openingHours: z.array(
     z.object({
@@ -28,12 +28,12 @@ export const siteSettingsSchema = z.object({
   ),
   pricing: z.object({
     bilan: z.object({
-      amount: z.number().positive(),
+      amount: z.union([z.number(), z.string()]),
       label: z.string(),
       description: z.string(),
     }),
     seance: z.object({
-      amount: z.number().positive(),
+      amount: z.union([z.number(), z.string()]),
       label: z.string(),
       duration: z.string(),
     }),

@@ -94,19 +94,28 @@ flowchart TD
 
 Pour faciliter le travail de collecte auprès de Keliann L'Azou lors de la Phase 2, voici la grille d'inventaire :
 
-| Élément | Type | Statut V1 | Utilisation dans le site |
-| :--- | :--- | :--- | :--- |
-| **Portrait du praticien** | Photo HD (verticale ou carrée) | *Placeholder visuel avec icône* | Section "Qui suis-je ?" |
-| **Salle de consultation** | Photo HD (paysage 16:9 ou 16:10) | *Placeholder visuel avec icône* | Section "Le Cabinet" (vue principale) |
-| **Devanture / Accès** | Photo HD (paysage 4:3) | *Placeholder visuel avec icône* | Vignette 1 "Le Cabinet" |
-| **Salle d'attente** | Photo HD (paysage 4:3) | *Placeholder visuel avec icône* | Vignette 2 "Le Cabinet" |
-| **Biographie / Approche** | Texte court (2 à 3 paragraphes) | *Texte indicatif type* | Section "Qui suis-je ?" |
-| **Citation inspirante** | Phrase courte + auteur | *Citation indicative type* | Bas de la section "Mes Valeurs" |
-| **Lien Doctolib** | URL complète | *URL par défaut (doctolib.fr)* | Bouton Header, Hero et Footer |
-| **Adresse & Accès** | Adresse postale + étage/digicode | *Adresse indicative type* | Colonne "Infos Pratiques" & Footer |
-| **Horaires d'ouverture** | Tableau des créneaux par jour | *Plages indicatives 8h30-19h30* | Colonne "Infos Pratiques" |
-| **Tarifs & Durées** | Bilan et séance individuelle (€) | *180 € bilan / 45 € séance* | Colonne "Infos Pratiques" |
-| **Identifiants légaux** | RPPS & SIRET | *Identifiants factices sécurisés* | Mentions légales Footer |
+| Catégorie (Mail Cadrage) | Élément | Format / Type | Statut Actuel V1 | Emplacement UI |
+| :--- | :--- | :--- | :--- | :--- |
+| **1. Identité légale & Santé** | Titre professionnel | Texte officiel | *Keliann L'Azou – Psychomotricien D.E.* | Header & Footer |
+| | Numéro RPPS | Identifiant santé | `[RPPS : en attente d'attribution]` | Footer & Mentions |
+| | Numéro SIRET | Identifiant légal | `[SIRET : en cours d'attribution]` | Mentions légales Footer |
+| | Formule d'ordonnance | Texte réglementaire | `« Bilan psychomoteur et rééducation si nécessaire »` | Section "Qui suis-je ?" |
+| **2. Pratique & Textes** | Section « Qui suis-je ? » | 2 paragraphes (école, parcours, approche) | *Lorem Ipsum + note explicative* | Section "Qui suis-je ?" |
+| | 3 Valeurs clés | 3 concepts + 1 phrase chacun | *Valeurs 1, 2, 3 en Lorem Ipsum* | Section "Mes Valeurs" |
+| | Citation / Accroche | Phrase inspirante + auteur | *Citation d'attente en Lorem Ipsum* | Bas de la section Valeurs |
+| | 8 Motifs de consultation | Titre court + 1 ou 2 phrases par motif | *8 domaines cliniques avec Lorem Ipsum* | Section "La Psychomotricité" |
+| **3. Tarifs & Remboursements** | Tarif Bilan complet | Montant en € | `XX € (En attente)` | Section "Cabinet & Tarifs" |
+| | Tarif Séance de suivi | Montant en € + durée (40 ou 45 min) | `XX € (Durée : 40 ou 45 min à préciser)` | Section "Cabinet & Tarifs" |
+| | Note mutuelles / aides | Information MDPH / PCO | *Lorem Ipsum + note d'attente* | Section "Cabinet & Tarifs" |
+| **4. Accès & Contact** | Profil Doctolib | URL profil de réservation | *https://www.doctolib.fr (en attente lien direct)* | Bouton Header, Hero & Footer |
+| | Adresse physique | N°, rue, CP, ville, étage, PMR | `[Numéro et rue en attente, Ville]` | Section Cabinet & Footer |
+| | Fiche Google Maps | URL itinéraire Maps | `Lien Maps en attente (#)` | Section Cabinet & Footer |
+| | Coordonnées directes | Téléphone pro & Email | `06 -- -- -- --` / `contact@... (en attente)` | Footer & Panneau /admin |
+| | Horaires d'ouverture | Plages par jour de la semaine | `[Horaires en attente de confirmation]` | Section Cabinet |
+| **5. Photos & Médias (HD)** | 1. Portrait de Keliann | Format vertical 4:5 (1200x1500) | *Placeholder calibré 4:5* | Section "Qui suis-je ?" |
+| | 2. Salle consultation / moteur | Format paysage 16:10 (1920x1200) | *Placeholder calibré 16:10* | Section "Le Cabinet" |
+| | 3. Devanture / entrée PMR | Format paysage 4:3 (800x600) | *Placeholder calibré 4:3* | Vignette 1 "Le Cabinet" |
+| | 4. Salle d'attente | Format paysage 4:3 (800x600) | *Placeholder calibré 4:3* | Vignette 2 "Le Cabinet" |
 
 ---
 

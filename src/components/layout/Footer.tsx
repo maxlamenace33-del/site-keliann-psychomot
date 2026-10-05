@@ -8,6 +8,7 @@ interface FooterProps {
 
 export function Footer({ settings }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const isMapsPending = settings.contact.googleMapsUrl === "#";
 
   return (
     <footer id="contact" className="bg-[#F7F5F0] border-t border-[#E8E4DC] text-[#232B28] pt-16 pb-12">
@@ -29,7 +30,7 @@ export function Footer({ settings }: FooterProps) {
             </p>
             <div className="flex items-center gap-2 text-xs text-[#58625E] bg-white/70 py-2 px-3 rounded-xl border border-[#E8E4DC] w-fit">
               <ShieldCheck className="w-4 h-4 text-sage-600 shrink-0" />
-              <span>N° RPPS : {settings.legal.rpps}</span>
+              <span>{settings.legal.rpps}</span>
             </div>
           </div>
 
@@ -40,48 +41,38 @@ export function Footer({ settings }: FooterProps) {
             </h4>
             <ul className="space-y-3 text-sm text-[#58625E]">
               <li>
-                <a
-                  href={`tel:${settings.contact.phone.replace(/\s+/g, "")}`}
-                  className="flex items-center gap-3 hover:text-sage-700 transition-colors"
-                >
+                <div className="flex items-center gap-3">
                   <span className="p-2 rounded-lg bg-sage-50 text-sage-700">
                     <Phone className="w-4 h-4" />
                   </span>
                   <span className="font-medium text-[#232B28]">{settings.contact.phone}</span>
-                </a>
+                </div>
               </li>
               <li>
-                <a
-                  href={`mailto:${settings.contact.email}`}
-                  className="flex items-center gap-3 hover:text-sage-700 transition-colors"
-                >
+                <div className="flex items-center gap-3">
                   <span className="p-2 rounded-lg bg-sage-50 text-sage-700">
                     <Mail className="w-4 h-4" />
                   </span>
-                  <span>{settings.contact.email}</span>
-                </a>
+                  <span className="break-all">{settings.contact.email}</span>
+                </div>
               </li>
               <li>
-                <a
-                  href={settings.contact.googleMapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start gap-3 hover:text-sage-700 transition-colors group"
-                >
+                <div className="flex items-start gap-3">
                   <span className="p-2 rounded-lg bg-sage-50 text-sage-700 shrink-0 mt-0.5">
                     <MapPin className="w-4 h-4" />
                   </span>
-                  <span>
-                    {settings.contact.address.street}
-                    <br />
-                    {settings.contact.address.postalCode} {settings.contact.address.city}
-                    {settings.contact.address.complement && (
-                      <span className="block text-xs text-[#58625E]/80">
-                        {settings.contact.address.complement}
-                      </span>
+                  <div>
+                    <p className="font-medium text-[#232B28]">{settings.contact.address.street}</p>
+                    <p className="text-xs text-[#58625E]">
+                      {settings.contact.address.postalCode} {settings.contact.address.city}
+                    </p>
+                    {isMapsPending && (
+                      <p className="text-[11px] text-sage-700 italic mt-0.5">
+                        * Lien Google Maps en attente
+                      </p>
                     )}
-                  </span>
-                </a>
+                  </div>
+                </div>
               </li>
             </ul>
           </div>
@@ -89,7 +80,7 @@ export function Footer({ settings }: FooterProps) {
           {/* Colonne 3 : Prise de Rendez-vous */}
           <div className="space-y-4">
             <h4 className="text-base font-semibold text-[#232B28] tracking-tight">
-              Prendre Rendez-vous
+              Prise de Rendez-vous
             </h4>
             <p className="text-sm text-[#58625E] leading-relaxed">
               Consultez les créneaux disponibles pour les bilans initiaux et les séances de suivi en ligne.
@@ -101,11 +92,11 @@ export function Footer({ settings }: FooterProps) {
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-6 py-3.5 rounded-full text-sm font-semibold text-white bg-sage-600 hover:bg-sage-700 shadow-sm hover:shadow transition-all duration-200"
             >
               <Calendar className="w-4 h-4" />
-              <span>Réserver sur Doctolib</span>
+              <span>Prendre RDV sur Doctolib</span>
               <ExternalLink className="w-4 h-4 opacity-80" />
             </a>
             <p className="text-xs text-[#58625E] italic">
-              * Une prescription médicale est obligatoire dès la première séance.
+              * Prescription médicale obligatoire dès la première séance.
             </p>
           </div>
         </div>
@@ -114,10 +105,10 @@ export function Footer({ settings }: FooterProps) {
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#58625E]">
           <div className="space-y-1 text-center md:text-left">
             <p>
-              © {currentYear} {settings.contact.fullName} — Psychomotricien Diplômé d&apos;État. Tous droits réservés.
+              © {currentYear} {settings.contact.fullName} — {settings.contact.title}. Tous droits réservés.
             </p>
             <p className="text-[11px] text-[#58625E]/80">
-              SIRET : {settings.legal.siret} • {settings.legal.legalStatus}
+              {settings.legal.siret} • {settings.legal.legalStatus}
             </p>
           </div>
 
