@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { Camera, LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -8,6 +9,7 @@ interface ImagePlaceholderProps {
   subLabel?: string;
   badge?: string;
   icon?: LucideIcon;
+  imageSrc?: string;
   className?: string;
   overlayContent?: React.ReactNode;
 }
@@ -26,9 +28,56 @@ export function ImagePlaceholder({
   subLabel,
   badge = "Emplacement Photo V1",
   icon: Icon = Camera,
+  imageSrc,
   className,
   overlayContent,
 }: ImagePlaceholderProps) {
+  if (imageSrc) {
+    return (
+      <div
+        className={cn(
+          "relative w-full rounded-2xl border border-[#E8E4DC] bg-[#F7F5F0] flex flex-col justify-between p-4 sm:p-5 overflow-hidden shadow-sm transition-all duration-300 group hover:border-sage-400",
+          ratioClasses[aspectRatio],
+          className
+        )}
+      >
+        <Image
+          src={imageSrc}
+          alt={label}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+
+        {/* Dégradé doux pour la lisibilité des badges et légendes */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-black/25 pointer-events-none" />
+
+        {/* En-tête : Badge */}
+        <div className="relative z-10 flex justify-between items-start">
+          <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-sage-900 bg-white/90 backdrop-blur-md border border-[#E8E4DC] px-2.5 py-1 rounded-full shadow-2xs">
+            {badge}
+          </span>
+        </div>
+
+        {/* Pied : Légende ou contenu incrusté */}
+        {overlayContent ? (
+          <div className="relative z-10">{overlayContent}</div>
+        ) : (
+          <div className="relative z-10 text-left space-y-0.5">
+            <p className="font-semibold text-xs sm:text-sm text-white drop-shadow-xs">
+              {label}
+            </p>
+            {subLabel && (
+              <p className="text-[11px] text-white/85 line-clamp-1">
+                {subLabel}
+              </p>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div
       role="img"

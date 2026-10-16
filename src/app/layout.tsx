@@ -21,31 +21,32 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://keliann-psychomot.fr"),
   title: {
-    default: "Keliann L'Azou | Psychomotricien D.E. - Cabinet de Psychomotricité",
-    template: "%s | Keliann L'Azou Psychomotricien",
+    default: "Kéliann L'Azou | Psychomotricien D.E. à Bordeaux (33200)",
+    template: "%s | Kéliann L'Azou Psychomotricien Bordeaux",
   },
   description:
-    "Cabinet de psychomotricité de Keliann L'Azou, Psychomotricien Diplômé d'État. Bilans psychomoteurs et rééducation pour enfants, adolescents et adultes sur prescription médicale.",
+    "Cabinet de psychomotricité de Kéliann L'Azou, Psychomotricien Diplômé d'État (IFP de Bordeaux), situé au 73 Av. Louis Barthou, 33200 Bordeaux. Bilans psychomoteurs et suivi personnalisé.",
   keywords: [
-    "Psychomotricien",
-    "Psychomotricité",
-    "Bilan psychomoteur",
+    "Psychomotricien Bordeaux",
+    "Psychomotricité Bordeaux Caudéran",
+    "Bilan psychomoteur Bordeaux",
+    "Kéliann L'Azou",
     "Keliann L'Azou",
-    "Troubles des apprentissages",
-    "TDAH",
-    "Dysgraphie",
-    "Dyspraxie",
-    "Rééducation motrice",
+    "Graphisme et écriture",
+    "Coordination et dyspraxie",
+    "Motricité fine",
+    "Particularités sensorielles",
+    "Développement psychomoteur",
   ],
-  authors: [{ name: "Keliann L'Azou" }],
+  authors: [{ name: "Kéliann L'Azou" }],
   openGraph: {
     type: "website",
     locale: "fr_FR",
     url: "https://keliann-psychomot.fr",
-    title: "Keliann L'Azou | Psychomotricien Diplômé d'État",
+    title: "Kéliann L'Azou | Psychomotricien Diplômé d'État à Bordeaux",
     description:
-      "Cabinet de psychomotricité : accompagnement bienveillant pour enfants, adolescents et adultes sur prescription médicale.",
-    siteName: "Keliann L'Azou Psychomotricien",
+      "Cabinet de psychomotricité au 73 Av. Louis Barthou, 33200 Bordeaux : accompagnement bienveillant et individualisé à chaque étape de la vie.",
+    siteName: "Kéliann L'Azou Psychomotricien",
   },
 };
 
@@ -63,6 +64,7 @@ export default async function RootLayout({
     "@type": "MedicalBusiness",
     name: `${settings.contact.fullName} - ${settings.contact.title}`,
     medicalSpecialty: "Psychomotor Therapy",
+    identifier: settings.legal.rpps,
     telephone: settings.contact.phone,
     email: settings.contact.email,
     url: "https://keliann-psychomot.fr",
@@ -77,11 +79,11 @@ export default async function RootLayout({
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "08:30",
-        closes: "19:30",
+        opens: "09:15",
+        closes: "18:45",
       },
     ],
-    priceRange: "$$",
+    priceRange: "45€",
   };
 
   return (

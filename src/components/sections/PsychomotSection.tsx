@@ -1,46 +1,64 @@
-import { Compass, CheckCircle2 } from "lucide-react";
+import {
+  Compass,
+  PenTool,
+  Puzzle,
+  Scissors,
+  Activity,
+  Clock,
+  Sparkles,
+  Heart,
+  Baby,
+} from "lucide-react";
 
 export function PsychomotSection() {
   const motifs = [
     {
-      domain: "Motricité & Coordination",
-      title: "Difficultés motrices & maladresse (ex: TDC / Dyspraxie)",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. [1 ou 2 phrases explicatives en attente de Keliann]",
+      domain: "Apprentissages",
+      icon: <PenTool className="w-4 h-4 text-sage-600" />,
+      title: "Graphisme et écriture",
+      desc: "Difficultés à écrire, former les lettres ou tenir son crayon ? La psychomotricité aide à développer un geste graphique plus fluide.",
     },
     {
-      domain: "Graphisme & Apprentissages",
-      title: "Écriture et graphisme (ex: Dysgraphie, lenteur, douleur)",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. [1 ou 2 phrases explicatives en attente de Keliann]",
+      domain: "Praxies & Gestes",
+      icon: <Puzzle className="w-4 h-4 text-sage-600" />,
+      title: "Coordination et dyspraxie",
+      desc: "Difficultés à coordonner ses gestes ou à réaliser certaines activités du quotidien ? L'accompagnement aide à développer des stratégies adaptées.",
     },
     {
-      domain: "Attention & Impulsivité",
-      title: "Attention, agitation motrice (ex: TDA/H, canalisation)",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. [1 ou 2 phrases explicatives en attente de Keliann]",
+      domain: "Dextérité",
+      icon: <Scissors className="w-4 h-4 text-sage-600" />,
+      title: "Motricité fine",
+      desc: "Difficultés à découper, boutonner ou manipuler de petits objets ? Les séances permettent de travailler la précision et la coordination des gestes.",
+    },
+    {
+      domain: "Aisance corporelle",
+      icon: <Activity className="w-4 h-4 text-sage-600" />,
+      title: "Équilibre et motricité globale",
+      desc: "Difficultés à courir, sauter ou trouver son équilibre ? La psychomotricité aide à gagner en aisance corporelle.",
+    },
+    {
+      domain: "Organisation",
+      icon: <Clock className="w-4 h-4 text-sage-600" />,
+      title: "Repérage dans l'espace et le temps",
+      desc: "Difficultés à se repérer dans l'espace, s'organiser ou se situer dans le temps ? Des activités adaptées permettent de travailler ces repères.",
+    },
+    {
+      domain: "Sensorialité",
+      icon: <Sparkles className="w-4 h-4 text-sage-600" />,
+      title: "Particularités sensorielles",
+      desc: "Certaines sensations, matières ou certains bruits sont difficiles à supporter ? L'accompagnement aide à mieux comprendre ces particularités et à trouver des ajustements.",
     },
     {
       domain: "Émotions & Corps",
-      title: "Anxiété corporelle, gestion du stress et inhibition",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. [1 ou 2 phrases explicatives en attente de Keliann]",
+      icon: <Heart className="w-4 h-4 text-sage-600" />,
+      title: "Confiance en soi et vécu corporel",
+      desc: "Manque d'assurance dans les activités corporelles ou peur de l'échec ? Les séances offrent un cadre pour expérimenter et prendre confiance.",
     },
     {
-      domain: "Repérage & Organisation",
-      title: "Organisation spatio-temporelle et repères",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. [1 ou 2 phrases explicatives en attente de Keliann]",
-    },
-    {
-      domain: "Tonus & Posture",
-      title: "Troubles du tonus, crispations et tics moteurs",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. [1 ou 2 phrases explicatives en attente de Keliann]",
-    },
-    {
-      domain: "Petite Enfance",
-      title: "Retard dans les acquisitions psychomotrices du jeune enfant",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. [1 ou 2 phrases explicatives en attente de Keliann]",
-    },
-    {
-      domain: "Adultes & Aînés",
-      title: "Troubles de l'équilibre et autonomie corporelle",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. [1 ou 2 phrases explicatives en attente de Keliann]",
+      domain: "Bilan & Éveil",
+      icon: <Baby className="w-4 h-4 text-sage-600" />,
+      title: "Développement psychomoteur",
+      desc: "Des questions concernant le développement moteur ou la coordination de votre enfant ? Un bilan permet de mieux comprendre ses compétences et ses besoins.",
     },
   ];
 
@@ -56,23 +74,26 @@ export function PsychomotSection() {
         </h2>
         <p className="text-base text-[#58625E] leading-relaxed">
           La psychomotricité est une profession paramédicale réglementée qui s&apos;intéresse aux liens
-          entre le corps, les émotions et les fonctions cognitives. Elle s&apos;exerce exclusivement sur prescription médicale.
+          entre le corps, les émotions et les fonctions cognitives. À travers le mouvement et l&apos;expérience
+          corporelle, elle permet à chacun de mieux se connaître, de développer ses compétences et de gagner
+          en aisance au quotidien.
         </p>
       </div>
 
       {/* Sous-bloc : Pour qui ? */}
       <div className="space-y-6">
         <h3 className="text-xl font-bold text-[#232B28] text-center">
-          Pour qui ?
+          À chaque étape de la vie
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="p-6 rounded-2xl bg-white border border-[#E8E4DC] space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-sage-600 bg-sage-50 px-2.5 py-1 rounded-md inline-block">
               Enfants
             </span>
-            <h4 className="text-lg font-semibold text-[#232B28]">Bébés & Enfants</h4>
+            <h4 className="text-lg font-semibold text-[#232B28]">Nourrissons & Enfants</h4>
             <p className="text-sm text-[#58625E] leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Retard moteur, troubles des apprentissages (DYS), difficultés graphiques ou attentionnelles.
+              Éveil et développement psychomoteur, acquisition des coordinations, motricité fine,
+              geste graphique, repères spatio-temporels et accompagnement des troubles du neurodéveloppement.
             </p>
           </div>
 
@@ -80,9 +101,10 @@ export function PsychomotSection() {
             <span className="text-xs font-bold uppercase tracking-wider text-teal-dark bg-teal-soft/60 px-2.5 py-1 rounded-md inline-block">
               Adolescents
             </span>
-            <h4 className="text-lg font-semibold text-[#232B28]">Adolescents & Jeunes Adultes</h4>
+            <h4 className="text-lg font-semibold text-[#232B28]">Adolescents</h4>
             <p className="text-sm text-[#58625E] leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mal-être corporel, anxiété, perte de repères, organisation et confiance en soi.
+              Accompagnement des transformations corporelles, organisation dans les apprentissages,
+              gestion des émotions, particularités sensorielles et renforcement de la confiance en soi.
             </p>
           </div>
 
@@ -92,7 +114,8 @@ export function PsychomotSection() {
             </span>
             <h4 className="text-lg font-semibold text-[#232B28]">Adultes & Seniors</h4>
             <p className="text-sm text-[#58625E] leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Gestion du stress, rééducation neurologique, équilibre et maintien de l&apos;autonomie.
+              Réappropriation du vécu corporel, apaisement des tensions tonico-émotionnelles,
+              travail de l&apos;équilibre, prévention des chutes et maintien de l&apos;autonomie au quotidien.
             </p>
           </div>
         </div>
@@ -102,10 +125,10 @@ export function PsychomotSection() {
       <div className="space-y-6">
         <div className="text-center space-y-2">
           <h3 className="text-xl font-bold text-[#232B28]">
-            Dans quelles situations consulter ? (8 Motifs de consultation)
+            Motifs de consultation
           </h3>
           <p className="text-sm text-[#58625E]">
-            Situations fréquentes justifiant la réalisation d&apos;un bilan psychomoteur en cabinet.
+            Exemples de situations fréquentes pour lesquelles un bilan ou un suivi psychomoteur peut être proposé.
           </p>
         </div>
 
@@ -115,20 +138,19 @@ export function PsychomotSection() {
               key={i}
               className="p-5 rounded-2xl bg-white border border-[#E8E4DC] hover:border-sage-400 hover:shadow-2xs transition-all duration-200 flex flex-col justify-between space-y-3"
             >
-              <div className="space-y-2">
+              <div className="space-y-2.5">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="flex items-center gap-1.5 text-sage-700 font-semibold">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-teal-dark shrink-0" />
-                    <span>Motif {i + 1}</span>
+                  <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-sage-50">
+                    {motif.icon}
                   </span>
-                  <span className="text-[10px] text-[#58625E]/70 font-medium">
+                  <span className="text-[11px] text-[#58625E]/80 font-medium bg-[#F7F5F0] px-2 py-0.5 rounded-md">
                     {motif.domain}
                   </span>
                 </div>
-                <h4 className="font-semibold text-sm text-[#232B28] leading-snug">
+                <h4 className="font-semibold text-base text-[#232B28] leading-snug">
                   {motif.title}
                 </h4>
-                <p className="text-xs text-[#58625E] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#58625E] leading-relaxed">
                   {motif.desc}
                 </p>
               </div>

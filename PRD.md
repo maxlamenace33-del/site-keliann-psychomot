@@ -1,52 +1,51 @@
 # Product Requirement Document (PRD)
 
-## Projet : Site Vitrine Professionnel - Keliann L'Azou, Psychomotricien D.E.
-- **Statut :** Phase 1 — Développement V1 (Maquette interactive & Placeholders)
+## Projet : Site Vitrine Professionnel - Kéliann L'Azou, Psychomotricien D.E.
+- **Statut :** Phase 2/3 — Contenus Réels Intégrés & Recette Visuelle
 - **Auteur :** Tech Lead & Product Architect
-- **Cible immédiate :** Environnement local & Prévisualisation de recette client
-- **Cible finale (mise en suspens) :** Déploiement Cloud (Vercel / Cloudflare) & Domaine Infomaniak
-- **Version :** 1.1.0
+- **Cible immédiate :** Environnement local & Prévisualisation client avec données officielles
+- **Cible finale (en attente validation finale) :** Déploiement Cloud (Vercel / Cloudflare) & Domaine Infomaniak
+- **Version :** 1.2.0
 
 ---
 
 ## 1. Résumé Exécutif & Vision Produit
 
 ### 1.1 Contexte & Mission
-Keliann L'Azou est Psychomotricien Diplômé d'État (D.E.). La psychomotricité est une profession paramédicale réglementée par le Code de la Santé Publique, exercée sur prescription médicale obligatoire.
+Kéliann L'Azou est Psychomotricien Diplômé d'État (D.E.), formé à l'IFP de Bordeaux (RPPS : `10112605869`). La psychomotricité est une profession paramédicale réglementée par le Code de la Santé Publique, exercée sur prescription médicale obligatoire.
 
-L'objectif principal du projet est de doter Keliann d'une présence en ligne professionnelle, sobre, rassurante et ultra-performante. Le site doit servir de vitrine de réassurance pour les patients (enfants, adolescents, adultes, seniors), leurs familles (parents désorientés face à des difficultés scolaires ou de développement) et le réseau médical/paramédical (médecins généralistes, pédiatres, neuropédiatres, orthophonistes, ergothérapeutes, psychologues, enseignants).
+Son cabinet est situé au **73 Av. Louis Barthou, 33200 Bordeaux** (rez-de-chaussée, accès par interphone).
+
+L'objectif principal du projet est de doter Kéliann d'une présence en ligne professionnelle, sobre, rassurante et ultra-performante. Le site doit servir de vitrine de réassurance pour les patients (enfants, adolescents, adultes, seniors), leurs familles et le réseau médical/paramédical bordelais.
 
 ### 1.2 Objectifs Stratégiques
-1. **Clarté pédagogique :** Démystifier la psychomotricité auprès du grand public à travers une ergonomie visuelle claire (définition, champs d'application, motifs de consultation).
-2. **Conversion sans friction :** Guider l'utilisateur vers la prise de rendez-vous en ligne via **Doctolib** (ou contact direct téléphone/email si les créneaux Doctolib ne sont pas encore ouverts).
+1. **Clarté pédagogique :** Démystifier la psychomotricité auprès du grand public à travers une ergonomie visuelle claire (présentation, valeurs clés, 8 motifs de consultation).
+2. **Conversion sans friction :** Guider l'utilisateur vers la prise de rendez-vous en ligne via **Doctolib** ou par contact direct (`06 52 58 85 17` / `lazoukeliann.psychomot@gmail.com`).
 3. **Point d'atterrissage carte de visite :** Assurer une vitesse d'affichage instantanée lors du scan du **QR Code** imprimé sur les cartes de visite professionnelles.
-4. **Zéro friction technique & No-Overengineering :** Maintenir une maintenance quasi-nulle pour le praticien, avec un panneau d'administration minimaliste permettant d'éditer les coordonnées, horaires, tarifs et une bannière d'information temporaire (congés, déménagement).
+4. **Zéro friction technique & No-Overengineering :** Maintenir une maintenance quasi-nulle pour le praticien, avec un panneau d'administration minimaliste (`/admin`) permettant d'éditer les coordonnées, horaires, tarifs, identifiants légaux et une bannière d'information temporaire.
 
 ---
 
-## 2. Feuille de Route & Phasing du Projet (Roadmap V1)
-
-> [!IMPORTANT]
-> **Décision de cadrage produit :** Le projet ne sera **pas déployé en production ni rattaché au nom de domaine Infomaniak** dans l'immédiat. Le cycle de vie du projet est scindé en 4 phases claires afin d'intégrer les allers-retours du praticien sur les textes, photos, fonctionnalités et design.
+## 2. Feuille de Route & Phasing du Projet (Roadmap)
 
 ```mermaid
 flowchart TD
-    subgraph PHASE_1 ["Phase 1 : Développement V1 (Actuelle)"]
+    subgraph PHASE_1 ["Phase 1 : Développement V1 (Terminée)"]
         P1_A[Socle Tokens & Layout] --> P1_B[Découpage modulaire des sections]
         P1_B --> P1_C[Composants Placeholders Images & Textes]
         P1_C --> P1_D[Back-office minimaliste /admin & Auth]
     end
 
-    subgraph PHASE_2 ["Phase 2 : Recette Client & Collecte"]
-        P1_D --> P2_A[Démo locale / Preview interactive à Keliann]
-        P2_A --> P2_B[Collecte des textes définitifs & tarifs]
-        P2_A --> P2_C[Réception des photos HD cabinet & portrait]
-        P2_A --> P2_D[Recueil des retours design & UX]
+    subgraph PHASE_2 ["Phase 2 : Intégration Contenus Client (Terminée)"]
+        P1_D --> P2_A[Intégration textes officiels Kéliann & IFP Bordeaux]
+        P2_A --> P2_B[Intégration RPPS 10112605869 & Ordonnance]
+        P2_B --> P2_C[Intégration Adresse Bordeaux, Horaires, Tarif 45€]
+        P2_C --> P2_D[Photos d'illustration temporaires du cabinet]
     end
 
-    subgraph PHASE_3 ["Phase 3 : Intégration Finale"]
-        P2_B & P2_C & P2_D --> P3_A[Ajustements UI & Réactivité des textes]
-        P3_A --> P3_B[Remplacement placeholders par photos réelles WebP]
+    subgraph PHASE_3 ["Phase 3 : Derniers Éléments & Recette (En cours)"]
+        P2_D --> P3_A[Réception Photo Portrait + Photos réelles du local]
+        P3_A --> P3_B[Confirmation Tarif Bilan, Lien Doctolib & SIRET]
         P3_B --> P3_C[Validation finale du praticien]
     end
 
@@ -57,168 +56,46 @@ flowchart TD
     end
 
     style PHASE_1 fill:#E8F0EC,stroke:#5E8B7E,stroke-width:2px
-    style PHASE_2 fill:#FEF3C7,stroke:#D97706,stroke-width:2px
-    style PHASE_3 fill:#E0E7FF,stroke:#4338CA,stroke-width:2px
+    style PHASE_2 fill:#E8F0EC,stroke:#5E8B7E,stroke-width:2px
+    style PHASE_3 fill:#FEF3C7,stroke:#D97706,stroke-width:2px
     style PHASE_4 fill:#F3F4F6,stroke:#9CA3AF,stroke-dasharray: 5 5
 ```
 
-### 2.1 Description des 4 Phases
+---
 
-#### Phase 1 : Socle Technique & Maquette Interactive V1 (En cours)
-- Mise en place du layout complet avec design system Tailwind v4.
-- Développement de l'intégralité des sections avec des **placeholders structurés** (textes temporaires réalistes et cadres photos ergonomiques).
-- Implémentation du back-office `/admin` ultra-léger pour démontrer la capacité d'édition dynamique (horaires, coordonnées, alerte de congés).
-- **Livrable :** Application 100% exécutable en local (`npm run dev` et `npm run build`), propre, sans bug.
+## 3. Matrice des Contenus Client (État d'Avancement Phase 2/3)
 
-#### Phase 2 : Recette Client & Collecte des Actifs Finaux
-- Présentation interactive à Keliann L'Azou.
-- Recueil des retours :
-  - Ajustements de ton ou formulation sur les motifs de consultation et le parcours.
-  - Confirmation du montant des tarifs et durées des bilans.
-  - Remise des photographies officielles (portrait professionnel, vue large de la salle de motricité, vue d'entrée/accueil).
-  - Remise des coordonnées exactes et liens (URL définitive Doctolib, SIRET, RPPS).
-
-#### Phase 3 : Itération Design & Remplacement des Placeholders
-- Intégration des photographies traitées (formats WebP/AVIF optimisés avec `next/image`).
-- Calibrage des espacements et typographies pour s'adapter parfaitement à la longueur des textes réels.
-- Validation finale du rendu par le client.
-
-#### Phase 4 : Mise en Ligne & Domaine Infomaniak (Suspendue jusqu'à validation Phase 3)
-- Création du projet de production sur Vercel (ou Cloudflare Pages).
-- Configuration des enregistrements DNS (Type A et CNAME) dans le tableau de bord Infomaniak.
-- Vérification du certificat SSL Let's Encrypt et tests de performance Lighthouse en conditions réelles.
+| Catégorie | Élément | Statut | Valeur Intégrée / Reste à fournir |
+| :--- | :--- | :--- | :--- |
+| **1. Identité légale & Santé** | Titre professionnel | ✅ **Intégré** | *Kéliann L'Azou – Psychomotricien Diplômé d'État (IFP de Bordeaux)* |
+| | Numéro RPPS | ✅ **Intégré** | `10112605869` (Attestation ARS du 30/08/2026) |
+| | Numéro SIRET | ⏳ **En attente** | *En cours d'immatriculation (à renseigner via `/admin` dès réception)* |
+| | Formule d'ordonnance | ✅ **Intégré** | *« Je prescris la réalisation d’un bilan psychomoteur pour [nom de la personne], suivi si nécessaire d’une prise en charge en psychomotricité selon les conclusions du bilan. »* |
+| **2. Pratique & Textes** | Section « Qui suis-je ? » | ✅ **Intégré** | Texte complet en 5 paragraphes + accueil et conclusion |
+| | 3 Valeurs clés | ✅ **Intégré** | 1. *Individualité* • 2. *Bienveillance* • 3. *Respect du rythme* |
+| | Citation | ✅ **Intégré** | *« Accompagner, ce n'est pas montrer le chemin, c'est aider chacun à trouver le sien. »* |
+| | 8 Motifs de consultation | ✅ **Intégré** | Graphisme/écriture, Coordination/dyspraxie, Motricité fine, Équilibre/motricité globale, Repérage espace/temps, Particularités sensorielles, Confiance en soi/vécu corporel, Développement psychomoteur |
+| **3. Tarifs & Remboursements** | Tarif Séance de suivi | ✅ **Intégré** | **45 €** (Durée : **45 minutes**) |
+| | Tarif Bilan complet | ⏳ **En attente** | Affiché *« À définir »* (en attente d'alignement avec les confrères du secteur) |
+| | Note mutuelles / aides | ✅ **Intégré** | Texte explicatif clair (Assurance Maladie, mutuelles, MDPH, PCO) |
+| **4. Accès & Contact** | Adresse physique | ✅ **Intégré** | **73 Av. Louis Barthou, 33200 Bordeaux** (Rez-de-chaussée • Interphone) |
+| | Lien Google Maps | ✅ **Intégré** | Lien direct Google Maps actif vers le 73 Av. Louis Barthou, 33200 Bordeaux |
+| | Coordonnées directes | ✅ **Intégré** | `06 52 58 85 17` / `lazoukeliann.psychomot@gmail.com` |
+| | Horaires d'ouverture | ⚠️ **Prévisionnel** | `09h15 – 13h00 / 14h15 – 18h45` (jours exacts d'ouverture à confirmer) |
+| | Profil Doctolib | ⏳ **En attente** | Pointe vers Doctolib générique en attendant l'URL de la fiche praticien |
+| **5. Photos & Médias (HD)** | 1. Portrait de Kéliann | ⏳ **En attente** | Placeholder calibré 4:5 (photo portrait réelle requise) |
+| | 2. Salle de consultation | 🖼️ **Illustration** | Photo d'illustration temporaire intégrée (`/images/cabinet-salle-principale.jpg`) |
+| | 3. Entrée du cabinet | 🖼️ **Illustration** | Photo d'illustration temporaire intégrée (`/images/cabinet-entree.jpg`) |
+| | 4. Salle d'attente | 🖼️ **Illustration** | Photo d'illustration temporaire intégrée (`/images/cabinet-salle-attente.jpg`) |
 
 ---
 
-## 3. Matrice des Contenus Attendus du Client (Checklist)
+## 4. Liste Récapitulative des Éléments Manquants à Demander à Kéliann
 
-Pour faciliter le travail de collecte auprès de Keliann L'Azou lors de la Phase 2, voici la grille d'inventaire :
-
-| Catégorie (Mail Cadrage) | Élément | Format / Type | Statut Actuel V1 | Emplacement UI |
-| :--- | :--- | :--- | :--- | :--- |
-| **1. Identité légale & Santé** | Titre professionnel | Texte officiel | *Keliann L'Azou – Psychomotricien D.E.* | Header & Footer |
-| | Numéro RPPS | Identifiant santé | `[RPPS : en attente d'attribution]` | Footer & Mentions |
-| | Numéro SIRET | Identifiant légal | `[SIRET : en cours d'attribution]` | Mentions légales Footer |
-| | Formule d'ordonnance | Texte réglementaire | `« Bilan psychomoteur et rééducation si nécessaire »` | Section "Qui suis-je ?" |
-| **2. Pratique & Textes** | Section « Qui suis-je ? » | 2 paragraphes (école, parcours, approche) | *Lorem Ipsum + note explicative* | Section "Qui suis-je ?" |
-| | 3 Valeurs clés | 3 concepts + 1 phrase chacun | *Valeurs 1, 2, 3 en Lorem Ipsum* | Section "Mes Valeurs" |
-| | Citation / Accroche | Phrase inspirante + auteur | *Citation d'attente en Lorem Ipsum* | Bas de la section Valeurs |
-| | 8 Motifs de consultation | Titre court + 1 ou 2 phrases par motif | *8 domaines cliniques avec Lorem Ipsum* | Section "La Psychomotricité" |
-| **3. Tarifs & Remboursements** | Tarif Bilan complet | Montant en € | `XX € (En attente)` | Section "Cabinet & Tarifs" |
-| | Tarif Séance de suivi | Montant en € + durée (40 ou 45 min) | `XX € (Durée : 40 ou 45 min à préciser)` | Section "Cabinet & Tarifs" |
-| | Note mutuelles / aides | Information MDPH / PCO | *Lorem Ipsum + note d'attente* | Section "Cabinet & Tarifs" |
-| **4. Accès & Contact** | Profil Doctolib | URL profil de réservation | *https://www.doctolib.fr (en attente lien direct)* | Bouton Header, Hero & Footer |
-| | Adresse physique | N°, rue, CP, ville, étage, PMR | `[Numéro et rue en attente, Ville]` | Section Cabinet & Footer |
-| | Fiche Google Maps | URL itinéraire Maps | `Lien Maps en attente (#)` | Section Cabinet & Footer |
-| | Coordonnées directes | Téléphone pro & Email | `06 -- -- -- --` / `contact@... (en attente)` | Footer & Panneau /admin |
-| | Horaires d'ouverture | Plages par jour de la semaine | `[Horaires en attente de confirmation]` | Section Cabinet |
-| **5. Photos & Médias (HD)** | 1. Portrait de Keliann | Format vertical 4:5 (1200x1500) | *Placeholder calibré 4:5* | Section "Qui suis-je ?" |
-| | 2. Salle consultation / moteur | Format paysage 16:10 (1920x1200) | *Placeholder calibré 16:10* | Section "Le Cabinet" |
-| | 3. Devanture / entrée PMR | Format paysage 4:3 (800x600) | *Placeholder calibré 4:3* | Vignette 1 "Le Cabinet" |
-| | 4. Salle d'attente | Format paysage 4:3 (800x600) | *Placeholder calibré 4:3* | Vignette 2 "Le Cabinet" |
-
----
-
-## 4. Utilisateurs Cibles & Personas
-
-| Persona | Profil & Démographie | Problématique / Besoin | Comportement sur le site | Critère de succès |
-| :--- | :--- | :--- | :--- | :--- |
-| **Julie (36 ans), Maman de Thomas (8 ans)** | Parent actif, sur smartphone le soir | Difficultés scolaires de son fils (écriture illisible, agitation, manque d'attention). Conseillée par l'école ou le pédiatre. | Arrive via Google ou QR Code. Cherche à comprendre si la psychomotricité correspond au profil de Thomas, vérifie la localisation, les tarifs et clique sur Doctolib. | Rassurée en < 30 secondes par les motifs de consultation et prise de contact immédiate. |
-| **Dr. Martin (52 ans), Médecin Pédiatre** | Professionnel de santé local | Recherche des confrères de confiance dans sa zone géographique pour orienter ses jeunes patients. | Cherche la formation (D.E.), le numéro RPPS/ADELI, le cadre légal de prescription et la localisation exacte du cabinet. | Confirmation immédiate de la légitimité réglementaire et partage facile du lien aux parents. |
-| **Maxime (28 ans), Jeune Adulte** | Étudiant ou jeune travailleur | Stress chronique, dyspraxie diagnostiquée tardivement, perte de repères corporels ou rééducation post-traumatique. | Navigation discrète, vérifie que le cabinet accueille aussi les adultes et ados. | Sentiment d'inclusivité (la psychomotricité ne s'adresse pas qu'aux tout-petits). |
-
----
-
-## 5. Parcours Utilisateurs (User Journeys)
-
-### 5.1 Parcours A : Arrivée par QR Code (Carte de visite)
-```mermaid
-flowchart TD
-    Scan([Scan QR Code sur carte physique]) --> Landing[Arrivée immédiate racine /]
-    Landing --> Reassurance[Lecture rapide Hero + Titre D.E. + 4 Piliers]
-    Reassurance --> NeedDecision{Besoin immédiat ?}
-    NeedDecision -- "Prise de RDV" --> ClickDoctolib([Bouton CTA Doctolib])
-    NeedDecision -- "Vérifier le lieu & tarifs" --> ScrollInfos[Scroll ancre #infos-pratiques]
-    NeedDecision -- "Contacter directement" --> ClickTelEmail[Appel ou Email direct]
-```
-
----
-
-## 6. Spécifications Fonctionnelles Détaillées
-
-### 6.1 Header & Navigation (`#header`)
-- **Logo texte & Titre :** `Keliann L'Azou` (Typographie semi-bold) + `Psychomotricien D.E.` (Badge discret vert sauge).
-- **Navigation Desktop :** `#accueil`, `#qui-suis-je`, `#psychomotricite`, `#infos-pratiques`, `#contact`.
-- **Navigation Mobile :** Menu tiroir tactile avec fermeture au clic d'ancre.
-- **CTA Header :** Bouton `Prendre RDV` vers Doctolib.
-- **Comportement :** `sticky top-0`, fond translucide avec glassmorphism (`backdrop-blur-md`).
-
-### 6.2 Bannière d'Alerte Dynamique (Optionnelle)
-- **Position :** Au-dessus du Header.
-- **Comportement :** Affichée uniquement si `alertBanner.enabled === true`.
-- **Cas d'usage :** "Cabinet fermé pour congés du X au Y", "Ouverture de nouveaux créneaux".
-
-### 6.3 Hero Banner (`#accueil`)
-- **Titre H1 :** Clair, humain et rassurant.
-- **Sous-titre explicatif :** Présentation du rôle de Keliann L'Azou.
-- **Double CTA :** Bouton Doctolib + Lien d'ancrage `#infos-pratiques`.
-- **Visuel d'ambiance :** Cadre visuel soigné prêt à recevoir la photo d'ambiance.
-
-### 6.4 Bandeau des 4 Piliers Fondamentaux
-1. Motricité globale & fine
-2. Graphisme & Apprentissages
-3. Régulation émotionnelle
-4. Confiance & Conscience corporelle
-
-### 6.5 Section "Qui suis-je ?" (`#qui-suis-je`)
-- Texte de présentation du parcours universitaire et de la philosophie de soin.
-- **Encadré Réglementaire :** Obligation stricte de prescription médicale (Code de la Santé Publique).
-- Photo portrait professionnelle du praticien.
-
-### 6.6 Section "Mes Valeurs" & Citation Inspirante
-- Grille de 3 cartes : Écoute & Bienveillance, Approche Holistique, Travail en Réseau.
-- Citation inspirante sur le mouvement et le langage du corps.
-
-### 6.7 Section "La Psychomotricité" (`#psychomotricite`)
-- Définition pédagogique de la discipline.
-- Sous-bloc "Pour qui ?" (3 cartes : Enfants, Adolescents, Adultes & Seniors).
-- Sous-bloc "Dans quelles situations consulter ?" (8 motifs de consultation avec icônes et descriptions).
-
-### 6.8 Section "Informations pratiques & Le Cabinet" (`#infos-pratiques`)
-- Adresse physique avec lien interactif Google Maps.
-- Horaires d'ouverture par jour.
-- Tarifs indicatifs (Bilan et séance).
-- Modalités de prise en charge (Mutuelles et MDPH).
-- Galerie photo : 1 photo principale salle de motricité + 2 vignettes (façade, salle d'attente).
-
-### 6.9 Section "Me Contacter" & Footer (`#contact`)
-- Coordonnées directes (téléphone, email cliquable).
-- Bouton Doctolib.
-- Mentions légales (RPPS, SIRET, hébergeur, conformité RGPD).
-- Lien discret vers l'espace praticien `/admin`.
-
----
-
-## 7. Back-Office Simplifié (No-Overengineering)
-
-### 7.1 Philosophie
-Pas de CMS headless complexe ni de blog. Une interface unique sécurisée permettant d'éditer la bannière d'alerte, les coordonnées, les tarifs et les horaires.
-
-### 7.2 Champs Éditables
-1. Bannière d'alerte (activation, message, type).
-2. Contact (téléphone, email, adresse, lien Maps, lien Doctolib).
-3. Horaires d'ouverture.
-4. Tarifs (bilan, séance, note de remboursement).
-5. Note de prescription.
-
----
-
-## 8. Exigences Non-Fonctionnelles & Performance
-
-| Critère | Cible | Moyen mis en œuvre |
-| :--- | :--- | :--- |
-| **Performance (Lighthouse)** | Score ≥ 95 | Server Components React 19, zéro bundle inutile, Tailwind v4. |
-| **First Contentful Paint (FCP)** | < 1.0s | Polices optimisées via `next/font`, CSS inline critique. |
-| **Cumulative Layout Shift (CLS)** | 0.00 | Ratios d'aspect réservés pour les photos. |
-| **Accessibilité (a11y)** | Conforme WCAG 2.1 AA | Contrastes > 4.5:1, navigation clavier fluide, balises ARIA. |
-| **Données de santé (RGPD)** | 100% conforme | **Aucune donnée médicale n'est hébergée sur le site.** Prise de RDV déléguée à Doctolib. |
+1. **Photo Portrait (Photo 1/4) :** Une photo de lui (format vertical 4:5), lumineuse et naturelle, pour la section « Qui suis-je ? ».
+2. **Tarif du Bilan Psychomoteur :** Le prix en euros dès qu'il aura fixé ses honoraires par rapport aux praticiens du quartier.
+3. **Jours d'ouverture définitifs :** Savoir s'il consulte du lundi au vendredi inclus sur les créneaux `9h15–13h00 / 14h15–18h45` ou s'il y a des jours/demi-journées de fermeture.
+4. **Lien URL Doctolib (ou modalité de prise de RDV au lancement) :** L'adresse exacte de son profil Doctolib dès son ouverture (ou confirmer si les RDV se prennent uniquement par téléphone/mail au démarrage).
+5. **Numéro SIRET :** Dès réception de son avis de situation SIRENE / URSSAF pour compléter les mentions légales.
+6. **Photos réelles du cabinet (Photos 2/4, 3/4, 4/4) :** Dès qu'il aura accès à la pièce au 73 Av. Louis Barthou et qu'elle sera installée (en attendant, le site utilise 3 photos d'illustration chaleureuses et cohérentes).
+7. **Confirmation accès PMR :** Confirmer si le rez-de-chaussée au 73 Av. Louis Barthou est entièrement accessible aux personnes à mobilité réduite (PMR) et poussettes.

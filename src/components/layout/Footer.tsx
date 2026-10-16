@@ -8,7 +8,8 @@ interface FooterProps {
 
 export function Footer({ settings }: FooterProps) {
   const currentYear = new Date().getFullYear();
-  const isMapsPending = settings.contact.googleMapsUrl === "#";
+  const isMapsPending = !settings.contact.googleMapsUrl || settings.contact.googleMapsUrl === "#";
+  const cleanPhoneHref = `tel:${settings.contact.phone.replace(/\s+/g, "")}`;
 
   return (
     <footer id="contact" className="bg-[#F7F5F0] border-t border-[#E8E4DC] text-[#232B28] pt-16 pb-12">
@@ -25,12 +26,12 @@ export function Footer({ settings }: FooterProps) {
               </p>
             </div>
             <p className="text-sm text-[#58625E] leading-relaxed">
-              Cabinet de psychomotricité accueillant les nourrissons, enfants, adolescents et adultes.
-              Prise en soin globale et bienveillante sur prescription médicale.
+              Cabinet de psychomotricité à Bordeaux (formé à l&apos;IFP de Bordeaux). Accompagnement
+              personnalisé à chaque étape de la vie sur prescription médicale.
             </p>
             <div className="flex items-center gap-2 text-xs text-[#58625E] bg-white/70 py-2 px-3 rounded-xl border border-[#E8E4DC] w-fit">
               <ShieldCheck className="w-4 h-4 text-sage-600 shrink-0" />
-              <span>{settings.legal.rpps}</span>
+              <span className="font-medium text-[#232B28]">{settings.legal.rpps}</span>
             </div>
           </div>
 
@@ -41,20 +42,30 @@ export function Footer({ settings }: FooterProps) {
             </h4>
             <ul className="space-y-3 text-sm text-[#58625E]">
               <li>
-                <div className="flex items-center gap-3">
-                  <span className="p-2 rounded-lg bg-sage-50 text-sage-700">
+                <a
+                  href={cleanPhoneHref}
+                  className="flex items-center gap-3 group hover:text-sage-700 transition-colors"
+                >
+                  <span className="p-2 rounded-lg bg-sage-50 text-sage-700 group-hover:bg-sage-600 group-hover:text-white transition-colors">
                     <Phone className="w-4 h-4" />
                   </span>
-                  <span className="font-medium text-[#232B28]">{settings.contact.phone}</span>
-                </div>
+                  <span className="font-medium text-[#232B28] group-hover:text-sage-700">
+                    {settings.contact.phone}
+                  </span>
+                </a>
               </li>
               <li>
-                <div className="flex items-center gap-3">
-                  <span className="p-2 rounded-lg bg-sage-50 text-sage-700">
+                <a
+                  href={`mailto:${settings.contact.email}`}
+                  className="flex items-center gap-3 group hover:text-sage-700 transition-colors"
+                >
+                  <span className="p-2 rounded-lg bg-sage-50 text-sage-700 group-hover:bg-sage-600 group-hover:text-white transition-colors">
                     <Mail className="w-4 h-4" />
                   </span>
-                  <span className="break-all">{settings.contact.email}</span>
-                </div>
+                  <span className="break-all text-[#232B28] group-hover:text-sage-700">
+                    {settings.contact.email}
+                  </span>
+                </a>
               </li>
               <li>
                 <div className="flex items-start gap-3">
@@ -66,10 +77,21 @@ export function Footer({ settings }: FooterProps) {
                     <p className="text-xs text-[#58625E]">
                       {settings.contact.address.postalCode} {settings.contact.address.city}
                     </p>
-                    {isMapsPending && (
-                      <p className="text-[11px] text-sage-700 italic mt-0.5">
-                        * Lien Google Maps en attente
+                    {settings.contact.address.complement && (
+                      <p className="text-xs text-sage-700 mt-0.5">
+                        {settings.contact.address.complement}
                       </p>
+                    )}
+                    {!isMapsPending && (
+                      <a
+                        href={settings.contact.googleMapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-[11px] font-medium text-sage-700 hover:underline mt-1"
+                      >
+                        <span>Voir sur Google Maps</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
                     )}
                   </div>
                 </div>
@@ -83,7 +105,7 @@ export function Footer({ settings }: FooterProps) {
               Prise de Rendez-vous
             </h4>
             <p className="text-sm text-[#58625E] leading-relaxed">
-              Consultez les créneaux disponibles pour les bilans initiaux et les séances de suivi en ligne.
+              Consultez les disponibilités pour un bilan psychomoteur ou une séance de suivi en ligne, ou contactez directement le cabinet par téléphone ou par mail.
             </p>
             <a
               href={settings.contact.doctolibUrl}
@@ -96,7 +118,7 @@ export function Footer({ settings }: FooterProps) {
               <ExternalLink className="w-4 h-4 opacity-80" />
             </a>
             <p className="text-xs text-[#58625E] italic">
-              * Prescription médicale obligatoire dès la première séance.
+              * Prescription médicale obligatoire pour un bilan psychomoteur.
             </p>
           </div>
         </div>
@@ -108,7 +130,7 @@ export function Footer({ settings }: FooterProps) {
               © {currentYear} {settings.contact.fullName} — {settings.contact.title}. Tous droits réservés.
             </p>
             <p className="text-[11px] text-[#58625E]/80">
-              {settings.legal.siret} • {settings.legal.legalStatus}
+              {settings.legal.rpps} • {settings.legal.siret} • {settings.legal.legalStatus}
             </p>
           </div>
 

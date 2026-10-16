@@ -1,49 +1,49 @@
 {
   "alertBanner": {
     "enabled": false,
-    "message": "[Bannière d'alerte ou congés — message en attente]",
+    "message": "Ouverture prochaine du cabinet au 73 Avenue Louis Barthou à Bordeaux.",
     "variant": "info"
   },
   "contact": {
-    "fullName": "Keliann L'Azou",
+    "fullName": "Kéliann L'Azou",
     "title": "Psychomotricien Diplômé d'État",
-    "phone": "06 -- -- -- -- (En attente)",
-    "email": "contact@keliann-lazou-psychomot.fr (En attente)",
+    "phone": "06 52 58 85 17",
+    "email": "lazoukeliann.psychomot@gmail.com",
     "address": {
-      "street": "[Numéro et rue du cabinet en attente]",
-      "postalCode": "[Code postal]",
-      "city": "[Ville du cabinet]",
-      "complement": "[Étage, interphone, bâtiment & accès PMR en attente]"
+      "street": "73 Av. Louis Barthou",
+      "postalCode": "33200",
+      "city": "Bordeaux",
+      "complement": "Rez-de-chaussée • Accès par interphone"
     },
-    "googleMapsUrl": "#",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=73+Avenue+Louis+Barthou+33200+Bordeaux",
     "doctolibUrl": "https://www.doctolib.fr"
   },
   "openingHours": [
-    { "day": "Lundi", "slots": "[Horaires en attente]" },
-    { "day": "Mardi", "slots": "[Horaires en attente]" },
-    { "day": "Mercredi", "slots": "[Horaires en attente]" },
-    { "day": "Jeudi", "slots": "[Horaires en attente]" },
-    { "day": "Vendredi", "slots": "[Horaires en attente]" },
+    { "day": "Lundi", "slots": "09h15 – 13h00 / 14h15 – 18h45" },
+    { "day": "Mardi", "slots": "09h15 – 13h00 / 14h15 – 18h45" },
+    { "day": "Mercredi", "slots": "09h15 – 13h00 / 14h15 – 18h45" },
+    { "day": "Jeudi", "slots": "09h15 – 13h00 / 14h15 – 18h45" },
+    { "day": "Vendredi", "slots": "09h15 – 13h00 / 14h15 – 18h45" },
     { "day": "Samedi & Dimanche", "slots": "Fermé" }
   ],
   "pricing": {
     "bilan": {
-      "amount": "XX",
-      "label": "Bilan psychomoteur complet (tests + restitution)",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Bilan initial complet en attente du descriptif exact de Keliann."
+      "amount": "À définir",
+      "label": "Bilan psychomoteur complet",
+      "description": "Entretien d'anamnèse, passation de tests psychomoteurs étalonnés, rédaction du compte-rendu écrit et restitution orale des conclusions."
     },
     "seance": {
-      "amount": "XX",
-      "label": "Séance de suivi psychomoteur",
-      "duration": "40 ou 45 min (à préciser)"
+      "amount": 45,
+      "label": "Séance de suivi en psychomotricité",
+      "duration": "45 minutes"
     },
-    "reimbursementNote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. La psychomotricité n'est pas remboursée par la Sécurité Sociale de base. Une prise en charge peut être accordée par les mutuelles complémentaires de santé ou par des dispositifs d'aide (MDPH, PCO). Informations définitives en attente."
+    "reimbursementNote": "Les séances et bilans de psychomotricité ne sont pas remboursés par l'Assurance Maladie. Toutefois, de nombreuses mutuelles proposent une prise en charge partielle ou forfaitaire sur présentation d'une facture. Des financements sont également possibles via la MDPH ou les Plateformes de Coordination et d'Orientation (PCO)."
   },
-  "prescriptionNote": "« Bilan psychomoteur et rééducation si nécessaire » — Conformément au Code de la Santé Publique, la prise en charge en psychomotricité s'effectue sur prescription médicale obligatoire délivrée par votre médecin traitant ou spécialiste.",
+  "prescriptionNote": "« Je prescris la réalisation d’un bilan psychomoteur pour [nom de la personne], suivi si nécessaire d’une prise en charge en psychomotricité selon les conclusions du bilan. »",
   "legal": {
-    "rpps": "[RPPS : en attente d'attribution]",
-    "siret": "[SIRET : en cours d'attribution]",
-    "legalStatus": "Profession libérale réglementée — Membre d'une association de gestion agréée.",
+    "rpps": "RPPS : 10112605869",
+    "siret": "SIRET : en cours d'immatriculation",
+    "legalStatus": "Psychomotricien Diplômé d'État (IFP de Bordeaux) — Profession libérale réglementée",
     "host": "Vercel Inc. / Cloudflare Pages"
   }
 }

@@ -9,8 +9,10 @@ import {
   ExternalLink,
   Bell,
   Phone,
+  Clock,
   Euro,
   FileText,
+  ShieldCheck,
   CheckCircle2,
   AlertCircle,
   Loader2,
@@ -325,10 +327,59 @@ export function AdminDashboardClient({ initialSettings }: AdminDashboardClientPr
                   />
                 </div>
               </div>
+
+              <div className="space-y-1.5 sm:col-span-2">
+                <label className="text-xs font-semibold text-[#232B28]">Complément d&apos;adresse (Étage, interphone, PMR)</label>
+                <input
+                  type="text"
+                  value={formData.contact.address.complement || ""}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      contact: {
+                        ...formData.contact,
+                        address: { ...formData.contact.address, complement: e.target.value },
+                      },
+                    })
+                  }
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#E8E4DC] text-sm bg-[#FDFBF7]"
+                />
+              </div>
             </div>
           </section>
 
-          {/* 3. Tarifs indicatifs */}
+          {/* 3. Horaires d'ouverture */}
+          <section className="bg-white p-6 sm:p-8 rounded-3xl border border-[#E8E4DC] shadow-2xs space-y-5">
+            <div className="flex items-center gap-2.5 border-b border-[#E8E4DC] pb-4">
+              <div className="p-2 rounded-xl bg-sage-50 text-sage-700">
+                <Clock className="w-5 h-5" />
+              </div>
+              <div>
+                <h2 className="text-base font-bold text-[#232B28]">Horaires de consultation</h2>
+                <p className="text-xs text-[#58625E]">Plages d&apos;ouverture par jour de la semaine</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {formData.openingHours.map((item, idx) => (
+                <div key={idx} className="space-y-1.5">
+                  <label className="text-xs font-semibold text-[#232B28]">{item.day}</label>
+                  <input
+                    type="text"
+                    value={item.slots}
+                    onChange={(e) => {
+                      const updated = [...formData.openingHours];
+                      updated[idx] = { ...updated[idx], slots: e.target.value };
+                      setFormData({ ...formData, openingHours: updated });
+                    }}
+                    className="w-full px-4 py-2.5 rounded-xl border border-[#E8E4DC] text-sm bg-[#FDFBF7]"
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* 4. Tarifs indicatifs */}
           <section className="bg-white p-6 sm:p-8 rounded-3xl border border-[#E8E4DC] shadow-2xs space-y-5">
             <div className="flex items-center gap-2.5 border-b border-[#E8E4DC] pb-4">
               <div className="p-2 rounded-xl bg-sage-50 text-sage-700">
@@ -340,25 +391,7 @@ export function AdminDashboardClient({ initialSettings }: AdminDashboardClientPr
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#232B28]">Montant du Bilan Psychomoteur (€)</label>
-                <input
-                  type="text"
-                  value={formData.pricing.bilan.amount}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      pricing: {
-                        ...formData.pricing,
-                        bilan: { ...formData.pricing.bilan, amount: e.target.value },
-                      },
-                    })
-                  }
-                  className="w-full px-4 py-2.5 rounded-xl border border-[#E8E4DC] text-sm bg-[#FDFBF7]"
-                />
-              </div>
-
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-[#232B28]">Montant de la Séance (€)</label>
                 <input
@@ -377,7 +410,61 @@ export function AdminDashboardClient({ initialSettings }: AdminDashboardClientPr
                 />
               </div>
 
-              <div className="space-y-1.5 sm:col-span-2">
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-[#232B28]">Durée de la Séance</label>
+                <input
+                  type="text"
+                  value={formData.pricing.seance.duration}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      pricing: {
+                        ...formData.pricing,
+                        seance: { ...formData.pricing.seance, duration: e.target.value },
+                      },
+                    })
+                  }
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#E8E4DC] text-sm bg-[#FDFBF7]"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-[#232B28]">Montant du Bilan Psychomoteur (€)</label>
+                <input
+                  type="text"
+                  value={formData.pricing.bilan.amount}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      pricing: {
+                        ...formData.pricing,
+                        bilan: { ...formData.pricing.bilan, amount: e.target.value },
+                      },
+                    })
+                  }
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#E8E4DC] text-sm bg-[#FDFBF7]"
+                />
+              </div>
+
+              <div className="space-y-1.5 sm:col-span-3">
+                <label className="text-xs font-semibold text-[#232B28]">Description du Bilan Psychomoteur</label>
+                <input
+                  type="text"
+                  value={formData.pricing.bilan.description}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      pricing: {
+                        ...formData.pricing,
+                        bilan: { ...formData.pricing.bilan, description: e.target.value },
+                      },
+                    })
+                  }
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#E8E4DC] text-sm bg-[#FDFBF7]"
+                />
+              </div>
+
+              <div className="space-y-1.5 sm:col-span-3">
                 <label className="text-xs font-semibold text-[#232B28]">Note explicative sur le remboursement</label>
                 <textarea
                   rows={3}
@@ -394,35 +481,70 @@ export function AdminDashboardClient({ initialSettings }: AdminDashboardClientPr
             </div>
           </section>
 
-          {/* 4. Prescription médicale */}
+          {/* 5. Prescription médicale & Identifiants légaux */}
           <section className="bg-white p-6 sm:p-8 rounded-3xl border border-[#E8E4DC] shadow-2xs space-y-5">
             <div className="flex items-center gap-2.5 border-b border-[#E8E4DC] pb-4">
               <div className="p-2 rounded-xl bg-sage-50 text-sage-700">
-                <FileText className="w-5 h-5" />
+                <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-base font-bold text-[#232B28]">Cadre réglementaire & Prescription</h2>
-                <p className="text-xs text-[#58625E]">Rappel officiel figurant dans la section &quot;Qui suis-je ?&quot;</p>
+                <h2 className="text-base font-bold text-[#232B28]">Cadre réglementaire & Identifiants (RPPS / SIRET)</h2>
+                <p className="text-xs text-[#58625E]">Formule de prescription et mentions légales</p>
               </div>
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-[#232B28]">Texte légal</label>
-              <textarea
-                rows={3}
-                value={formData.prescriptionNote}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    prescriptionNote: e.target.value,
-                  })
-                }
-                className="w-full px-4 py-2.5 rounded-xl border border-[#E8E4DC] text-sm bg-[#FDFBF7]"
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-[#232B28]">Identifiant RPPS</label>
+                <input
+                  type="text"
+                  value={formData.legal.rpps}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      legal: { ...formData.legal, rpps: e.target.value },
+                    })
+                  }
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#E8E4DC] text-sm bg-[#FDFBF7]"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-[#232B28]">Numéro SIRET</label>
+                <input
+                  type="text"
+                  value={formData.legal.siret}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      legal: { ...formData.legal, siret: e.target.value },
+                    })
+                  }
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#E8E4DC] text-sm bg-[#FDFBF7]"
+                />
+              </div>
+
+              <div className="space-y-1.5 sm:col-span-2">
+                <label className="text-xs font-semibold text-[#232B28] flex items-center gap-1.5">
+                  <FileText className="w-3.5 h-3.5 text-sage-600" />
+                  <span>Formule de prescription médicale</span>
+                </label>
+                <textarea
+                  rows={3}
+                  value={formData.prescriptionNote}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      prescriptionNote: e.target.value,
+                    })
+                  }
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#E8E4DC] text-sm bg-[#FDFBF7]"
+                />
+              </div>
             </div>
           </section>
 
-          {/* Bouton de sauvegarde fixe ou visible */}
+          {/* Bouton de sauvegarde */}
           <div className="flex justify-end pt-4">
             <button
               type="submit"
