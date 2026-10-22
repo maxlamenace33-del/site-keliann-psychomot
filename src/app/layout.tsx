@@ -78,12 +78,24 @@ export default async function RootLayout({
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        dayOfWeek: ["Monday", "Wednesday", "Friday"],
         opens: "09:15",
-        closes: "18:45",
+        closes: "13:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Wednesday", "Friday"],
+        opens: "14:15",
+        closes: "18:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Saturday"],
+        opens: "09:15",
+        closes: "13:00",
       },
     ],
-    priceRange: "45€",
+    priceRange: "45€ - 190€",
   };
 
   return (

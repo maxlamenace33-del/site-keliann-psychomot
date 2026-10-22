@@ -73,9 +73,10 @@ export function AboutSection({ settings }: AboutSectionProps) {
           <ImagePlaceholder
             aspectRatio="4/5"
             icon={UserCheck}
+            imageSrc="/images/keliann-portrait.jpg"
             label={`Portrait de ${settings.contact.fullName}`}
-            subLabel="Photo portrait professionnelle en attente de transmission (Format 4:5)"
-            badge="Photo portrait à venir"
+            subLabel="Psychomotricien Diplômé d'État • IFP de Bordeaux"
+            badge="Psychomotricien D.E."
             overlayContent={
               <div className="bg-white/95 backdrop-blur-sm p-4 rounded-xl border border-[#E8E4DC] shadow-sm">
                 <p className="font-bold text-sm text-[#232B28]">{settings.contact.fullName}</p>

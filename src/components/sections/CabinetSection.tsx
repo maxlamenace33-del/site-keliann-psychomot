@@ -1,4 +1,4 @@
-import { MapPin, Clock, Euro, Sparkles, ExternalLink, Activity, DoorOpen, Coffee } from "lucide-react";
+import { MapPin, Clock, Euro, Sparkles, ExternalLink, Activity, DoorOpen, Accessibility } from "lucide-react";
 import { SiteSettings } from "@/types/settings";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 
@@ -34,9 +34,15 @@ export function CabinetSection({ settings }: CabinetSectionProps) {
           <div className="space-y-8">
             {/* Adresse */}
             <div className="space-y-2">
-              <div className="flex items-center gap-2 font-semibold text-base text-[#232B28]">
-                <MapPin className="w-5 h-5 text-sage-600" />
-                <span>Adresse & Accès</span>
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 font-semibold text-base text-[#232B28]">
+                  <MapPin className="w-5 h-5 text-sage-600" />
+                  <span>Adresse & Accès</span>
+                </div>
+                <span className="inline-flex items-center gap-1.5 text-[11px] text-sage-800 bg-sage-50 border border-sage-200 px-2.5 py-0.5 rounded-full font-medium">
+                  <Accessibility className="w-3.5 h-3.5 text-sage-700" />
+                  <span>Accès PMR (RDC)</span>
+                </span>
               </div>
               <div className="p-4 rounded-xl bg-[#FDFBF7] border border-[#E8E4DC] text-sm text-[#232B28] space-y-1">
                 <p className="font-semibold text-base">{settings.contact.address.street}</p>
@@ -63,12 +69,25 @@ export function CabinetSection({ settings }: CabinetSectionProps) {
                 </span>
               </div>
               <div className="divide-y divide-[#E8E4DC]/60 rounded-xl border border-[#E8E4DC] bg-[#FDFBF7] px-4 py-1 text-xs sm:text-sm text-[#58625E]">
-                {settings.openingHours.map((h, i) => (
-                  <div key={i} className="flex flex-wrap justify-between items-center py-2 gap-2">
-                    <span className="font-medium text-[#232B28]">{h.day}</span>
-                    <span className="font-mono text-xs sm:text-sm">{h.slots}</span>
-                  </div>
-                ))}
+                {settings.openingHours.map((h, i) => {
+                  const isClosed = h.slots.toLowerCase().includes("fermé");
+                  return (
+                    <div key={i} className="flex flex-wrap justify-between items-center py-2 gap-2">
+                      <span className={isClosed ? "text-[#58625E]/70" : "font-medium text-[#232B28]"}>
+                        {h.day}
+                      </span>
+                      <span
+                        className={
+                          isClosed
+                            ? "text-xs text-[#58625E]/60 italic"
+                            : "font-mono text-xs sm:text-sm font-medium text-[#232B28]"
+                        }
+                      >
+                        {h.slots}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
@@ -94,7 +113,7 @@ export function CabinetSection({ settings }: CabinetSectionProps) {
                     <p className="font-semibold text-sm text-[#232B28]">{settings.pricing.bilan.label}</p>
                     <p className="text-xs text-[#58625E] mt-1">{settings.pricing.bilan.description}</p>
                   </div>
-                  <span className="text-sm sm:text-base font-bold text-sage-700 shrink-0 bg-white px-3.5 py-1.5 rounded-lg border border-[#E8E4DC]">
+                  <span className="text-base sm:text-lg font-bold text-sage-700 shrink-0 bg-white px-3.5 py-1.5 rounded-lg border border-[#E8E4DC]">
                     {formatPrice(settings.pricing.bilan.amount)}
                   </span>
                 </div>
@@ -113,37 +132,27 @@ export function CabinetSection({ settings }: CabinetSectionProps) {
             </div>
           </div>
 
-          {/* Colonne Droite : Galerie Photos Cabinet */}
+          {/* Colonne Droite : Galerie Photos Réelles du Cabinet */}
           <div className="space-y-4 flex flex-col justify-between">
-            {/* Photo 2/4 : Salle principale de consultation / espace moteur (16:10) */}
+            {/* Photo 1 du Cabinet */}
             <ImagePlaceholder
               aspectRatio="16/10"
               icon={Activity}
-              imageSrc="/images/cabinet-salle-principale.jpg"
-              label="Espace de psychomotricité"
-              subLabel="Salle de consultation et parcours moteur (photo d'illustration en attente de l'aménagement final)"
-              badge="Photo d'illustration"
+              imageSrc="/images/cabinet-2.jpg"
+              label="Salle de consultation"
+              subLabel="73 Av. Louis Barthou, Bordeaux • Espace lumineux en rez-de-chaussée (Accès PMR)"
+              badge="Le Cabinet"
             />
 
-            {/* 2 Vignettes : Devanture & Salle d'attente (4:3) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <ImagePlaceholder
-                aspectRatio="4/3"
-                icon={DoorOpen}
-                imageSrc="/images/cabinet-entree.jpg"
-                label="Entrée du cabinet"
-                subLabel="73 Av. Louis Barthou • Rez-de-chaussée"
-                badge="Photo d'illustration"
-              />
-              <ImagePlaceholder
-                aspectRatio="4/3"
-                icon={Coffee}
-                imageSrc="/images/cabinet-salle-attente.jpg"
-                label="Salle d'attente"
-                subLabel="Espace d'accueil calme et chaleureux"
-                badge="Photo d'illustration"
-              />
-            </div>
+            {/* Photo 2 du Cabinet */}
+            <ImagePlaceholder
+              aspectRatio="16/10"
+              icon={DoorOpen}
+              imageSrc="/images/cabinet-1.jpg"
+              label="Espace d'accueil & d'entretien"
+              subLabel="Un cadre calme, chaleureux et adapté à chaque âge"
+              badge="Le Cabinet"
+            />
 
             {/* Bouton Google Maps */}
             {isMapsPending ? (

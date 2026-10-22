@@ -2,9 +2,8 @@
 
 ## Projet : Site Vitrine Professionnel - Kéliann L'Azou, Psychomotricien D.E.
 - **Rôle :** Tech Lead & System Architect
-- **Version :** 1.2.0
-- **Statut d'exécution :** Phase 2/3 — Intégration des Contenus Réels & Photos d'Illustration
-- **Déploiement en production & DNS :** Mis en suspens dans l'attente de la photo portrait finale, du tarif du bilan, du lien Doctolib et du SIRET
+- **Version :** 1.3.0
+- **Statut d'exécution :** Phase 3 Terminée — Prêt pour déploiement V1 sur Vercel
 
 ---
 
@@ -15,42 +14,43 @@
 | **Étape 1** | `feat/design-tokens-and-layout` | Tokens Tailwind v4 (`globals.css`), Layout racine, `Navbar` responsive, `AlertBanner`, `Footer` déontologique. | ✅ **Terminé & fusionné** |
 | **Étape 2** | `feat/modular-sections-refactor` | Découpage de `page.tsx` en composants autonomes dans `src/components/sections/`. | ✅ **Terminé & fusionné** |
 | **Étape 3** | `feat/image-placeholders-system` | Composant réutilisable `<ImagePlaceholder />` avec gestion des ratios standards (4:5, 16:10, 4:3) et support `next/image`. | ✅ **Terminé & fusionné** |
-| **Étape 4** | `feat/admin-auth-and-settings` | Back-office `/admin` avec authentification maître en temps constant, cookie HttpOnly et persistance locale/KV. | ✅ **Terminé & fusionné** |
-| **Étape 5** | `feat/client-content-phase2` | Intégration des textes officiels de Kéliann L'Azou (IFP Bordeaux, Qui suis-je, 3 valeurs, citation, 8 motifs, RPPS `10112605869`, adresse 73 Av. Louis Barthou 33200 Bordeaux, horaires, tarif séance 45€, photos d'illustration du cabinet). | ✅ **Terminé** |
-| **Phase 3 (Finale)** | `feat/final-assets` | Intégration de la photo portrait réelle, des photos finales du local aménagé, du tarif bilan, du SIRET et de l'URL Doctolib. | ⏳ **En attente client** |
-| **Phase 4 (Prod)** | `chore/production-deployment` | Déploiement Vercel / Cloudflare et configuration DNS A/CNAME chez Infomaniak. | ⏸️ **En suspens** |
+| **Étape 4** | `feat/admin-auth-and-settings` | Back-office `/admin` avec authentification maître en temps constant, cookie HttpOnly et persistance hybride. | ✅ **Terminé & fusionné** |
+| **Étape 5** | `feat/client-content-phase2` | Intégration des textes officiels de Kéliann L'Azou (IFP Bordeaux, Qui suis-je, 3 valeurs, citation, 8 motifs, RPPS `10112605869`, adresse 73 Av. Louis Barthou 33200 Bordeaux). | ✅ **Terminé & fusionné** |
+| **Étape 6** | `feat/final-assets` | Intégration de la photo portrait réelle (`keliann-portrait.jpg`), des 2 photos réelles du cabinet (`cabinet-1.jpg`, `cabinet-2.jpg`), du tarif bilan (`190 €`), des horaires définitifs (Lun/Mer/Ven + Sam matin) et de l'accessibilité PMR. | ✅ **Terminé** |
+| **Phase 4 (Prod)** | `chore/production-deployment` | Déploiement V1 sur Vercel (`.vercel.app`) puis configuration DNS A/CNAME chez Infomaniak. | 🚀 **Prêt à déployer** |
 
 ---
 
-## 2. Architecture des Données & Paramètres Dynamiques
+## 2. Comment fonctionne le Backend & l'Espace `/admin` ?
 
-### 2.1 Fichier de Configuration Par Défaut (`src/data/default-settings.json`)
-Contient désormais les données officielles transmises par Kéliann L'Azou :
+Bien qu'il n'y ait pas de serveur Express/Python séparé, **Next.js embarque son propre Backend intégré** via les **Route Handlers (`src/app/api/`)** et les **Server Components** :
+
+1. **Routes Backend (`src/app/api/`) :**
+   - `POST /api/auth/login` : Vérifie le mot de passe maître (`ADMIN_PASSWORD`, par défaut `admin123` en local si non défini dans `.env.local`) en temps constant (`crypto.timingSafeEqual`) et dépose un cookie `HttpOnly` signé en HMAC-SHA256 (`psychomot_admin_session`).
+   - `POST /api/auth/logout` : Supprime le cookie de session.
+   - `GET & PUT /api/settings` : Lit et met à jour les paramètres du site après validation stricte par schéma **Zod** (`siteSettingsSchema`), puis invalide immédiatement le cache Next.js (`revalidatePath("/")`).
+
+2. **Stratégie de Persistance Hybride à 3 Niveaux (`src/lib/settings.ts`) :**
+   - **Niveau 1 — En local (`localhost:3000`) :** Les modifications faites dans `/admin` sont écrites directement sur le disque dans `src/data/live-settings.json`. Elles survivent aux rechargements de page et aux redémarrages.
+   - **Niveau 2 — Sur Vercel en mode Démo V1 (sans base de données configurée) :** Sur Vercel, le dossier du code source est en lecture seule (*read-only*). Le backend bascule donc automatiquement sur le stockage éphémère Serverless (`/tmp/psychomot-live-settings.json` + mémoire `globalThis`) pour permettre de tester l'interface `/admin` en direct lors de la démonstration !
+   - **Niveau 3 — Sur Vercel en Production Définitive (Upstash Redis / Vercel KV) :** Il suffit d'attacher en 1 clic une base Redis gratuite (**Upstash Redis** depuis l'onglet *Storage / Marketplace* de Vercel), ce qui injecte automatiquement `KV_REST_API_URL` et `KV_REST_API_TOKEN`. Dès lors, chaque sauvegarde dans `/admin` est stockée de façon permanente dans le Cloud.
+
+---
+
+## 3. Données Officielles par Défaut (`src/data/default-settings.json`)
+
 - **Identité :** `Kéliann L'Azou` — `Psychomotricien Diplômé d'État` (formé à l'IFP de Bordeaux).
 - **RPPS :** `RPPS : 10112605869` (Attestation ARS du 30/08/2026).
-- **Formule de prescription :** `« Je prescris la réalisation d’un bilan psychomoteur pour [nom de la personne], suivi si nécessaire d’une prise en charge en psychomotricité selon les conclusions du bilan. »`
-- **Coordonnées :** `06 52 58 85 17` • `lazoukeliann.psychomot@gmail.com` • `73 Av. Louis Barthou, 33200 Bordeaux (Rez-de-chaussée • Accès par interphone)`.
-- **Horaires prévisionnels :** `09h15 – 13h00 / 14h15 – 18h45`.
-- **Tarifs :** Séance à `45 €` (`45 minutes`), Bilan `À définir`.
-
-### 2.2 Composant Hybride `<ImagePlaceholder />`
-Supporte deux modes sans aucun décalage de mise en page (*CLS = 0.00*) :
-1. **Mode Photo (`imageSrc` fourni) :** Affiche l'image via `next/image` (`fill`, `object-cover`) avec un badge discret (`Photo d'illustration` ou `Le Cabinet`) et la légende en surimpression. Utilisé pour les 3 vues du cabinet (`/images/cabinet-salle-principale.jpg`, `/images/cabinet-entree.jpg`, `/images/cabinet-salle-attente.jpg`).
-2. **Mode Placeholder (`imageSrc` omis) :** Affiche une carte calibrée 4:5 pour le portrait de Kéliann L'Azou en attendant sa photographie personnelle.
-
----
-
-## 3. Schéma de Données TypeScript Central (`SiteSettings`)
-
-Le schéma Zod (`src/types/settings.ts`) accepte un montant numérique ou textuel (`z.union([z.number(), z.string()])`) pour les tarifs afin de permettre l'affichage propre de `"À définir"` pour le bilan et `45` pour la séance de suivi.
-
----
-
-## 4. Spécifications du Back-Office Minimaliste (`/admin`)
-
-Le tableau de bord `/admin` (`src/components/admin/AdminDashboardClient.tsx`) permet désormais à Kéliann d'éditer en autonomie :
-1. **Bannière d'alerte / Congés** (activation, message, variante).
-2. **Coordonnées & Liens** (téléphone, email, rue, code postal, ville, complément d'adresse, URL Doctolib, URL Google Maps).
-3. **Horaires de consultation** (édition jour par jour).
-4. **Tarifs & Remboursement** (montant séance, durée séance, montant bilan, description bilan, note mutuelles/MDPH/PCO).
-5. **Cadre réglementaire & Identifiants** (numéro RPPS, numéro SIRET, formule de prescription médicale).
+- **SIRET :** `SIRET : en cours d'attribution` (micro-entreprise créée, numéro attendu sous quelques jours).
+- **Coordonnées :** `06 52 58 85 17` • `lazoukeliann.psychomot@gmail.com` • `73 Av. Louis Barthou, 33200 Bordeaux (Rez-de-chaussée • Accessible PMR • Accès par interphone)`.
+- **Horaires d'ouverture :**
+  - **Lundi :** `09h15 – 13h00 / 14h15 – 18h00`
+  - **Mardi :** `Fermé`
+  - **Mercredi :** `09h15 – 13h00 / 14h15 – 18h00`
+  - **Jeudi :** `Fermé`
+  - **Vendredi :** `09h15 – 13h00 / 14h15 – 18h00`
+  - **Samedi :** `09h15 – 13h00`
+  - **Dimanche :** `Fermé`
+- **Tarifs :**
+  - **Séance de suivi :** `45 €` (`45 minutes`)
+  - **Bilan psychomoteur complet :** `190 €`

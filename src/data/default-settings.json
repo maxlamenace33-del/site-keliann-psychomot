@@ -13,22 +13,23 @@
       "street": "73 Av. Louis Barthou",
       "postalCode": "33200",
       "city": "Bordeaux",
-      "complement": "Rez-de-chaussée • Accès par interphone"
+      "complement": "Rez-de-chaussée • Accessible PMR • Accès par interphone"
     },
     "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=73+Avenue+Louis+Barthou+33200+Bordeaux",
     "doctolibUrl": "https://www.doctolib.fr"
   },
   "openingHours": [
-    { "day": "Lundi", "slots": "09h15 – 13h00 / 14h15 – 18h45" },
-    { "day": "Mardi", "slots": "09h15 – 13h00 / 14h15 – 18h45" },
-    { "day": "Mercredi", "slots": "09h15 – 13h00 / 14h15 – 18h45" },
-    { "day": "Jeudi", "slots": "09h15 – 13h00 / 14h15 – 18h45" },
-    { "day": "Vendredi", "slots": "09h15 – 13h00 / 14h15 – 18h45" },
-    { "day": "Samedi & Dimanche", "slots": "Fermé" }
+    { "day": "Lundi", "slots": "09h15 – 13h00 / 14h15 – 18h00" },
+    { "day": "Mardi", "slots": "Fermé" },
+    { "day": "Mercredi", "slots": "09h15 – 13h00 / 14h15 – 18h00" },
+    { "day": "Jeudi", "slots": "Fermé" },
+    { "day": "Vendredi", "slots": "09h15 – 13h00 / 14h15 – 18h00" },
+    { "day": "Samedi", "slots": "09h15 – 13h00" },
+    { "day": "Dimanche", "slots": "Fermé" }
   ],
   "pricing": {
     "bilan": {
-      "amount": "À définir",
+      "amount": 190,
       "label": "Bilan psychomoteur complet",
       "description": "Entretien d'anamnèse, passation de tests psychomoteurs étalonnés, rédaction du compte-rendu écrit et restitution orale des conclusions."
     },
@@ -42,7 +43,7 @@
   "prescriptionNote": "« Je prescris la réalisation d’un bilan psychomoteur pour [nom de la personne], suivi si nécessaire d’une prise en charge en psychomotricité selon les conclusions du bilan. »",
   "legal": {
     "rpps": "RPPS : 10112605869",
-    "siret": "SIRET : en cours d'immatriculation",
+    "siret": "SIRET : en cours d'attribution",
     "legalStatus": "Psychomotricien Diplômé d'État (IFP de Bordeaux) — Profession libérale réglementée",
     "host": "Vercel Inc. / Cloudflare Pages"
   }

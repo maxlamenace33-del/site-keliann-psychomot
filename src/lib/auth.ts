@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { timingSafeEqual } from "crypto";
 
 export const SESSION_COOKIE_NAME = "psychomot_admin_session";
 const SESSION_MAX_AGE = 60 * 60 * 24 * 7; // 7 jours
@@ -19,9 +20,7 @@ export function verifyMasterPassword(providedPassword: string): boolean {
     return false;
   }
 
-  // Node.js crypto timingSafeEqual
-  const crypto = require("crypto");
-  return crypto.timingSafeEqual(providedBuffer, masterBuffer);
+  return timingSafeEqual(providedBuffer, masterBuffer);
 }
 
 // Signature simple et sécurisée HMAC-SHA256

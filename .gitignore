@@ -37,6 +37,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local admin live settings
+src/data/live-settings.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
