@@ -73,13 +73,14 @@ export async function saveSiteSettings(newSettings: SiteSettings): Promise<void>
   // 1. Sauvegarde Cloud (si Vercel KV / Upstash est configuré)
   if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
     try {
-      await fetch(`${process.env.KV_REST_API_URL}/set/site_settings`, {
+      await fetch(`${process.env.KV_REST_API_URL}`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(JSON.stringify(newSettings)),
+        body: JSON.stringify(["SET", "site_settings", JSON.stringify(newSettings)]),
+        cache: "no-store",
       });
     } catch (err) {
       console.error("Erreur lors de l'enregistrement sur KV :", err);
